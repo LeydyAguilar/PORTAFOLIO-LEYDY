@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FINESI 2025</title>
+    <style>
+        body {
+            background-color: #E6E6FA; /* Lilac color */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header, section, footer {
+            padding: 20px;
+            margin: 0 auto;
+            max-width: 800px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        header {
+            text-align: center;
+            background-color: #DDA0DD; /* A slightly darker lilac for the header */
+            color: white;
+        }
+        h1, h2 {
+            color: #8A2BE2; /* Blue Violet for headings */
+        }
+        img {
+            display: block;
+            margin: 0 auto 20px auto; /* Center the image and add bottom margin */
+            max-width: 100%;
+            height: auto;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #9370DB; /* Medium Purple for buttons */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #8A2BE2;
+        }
+        footer {
+            text-align: center;
+            font-size: 0.9em;
+            color: #6A5ACD; /* Slate Blue for footer text */
+            background-color: #DDA0DD;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<img src="your_image_path.jpg" alt="Description of the image" /> 
+
+<header>
+    <h1>FINESI 2025</h1>
+    <p><strong>Docente:</strong> Fred Torres Cruz</p>
+    <p><strong>Estudiante:</strong> Leydy Griselda Aguilar Ccopa</p>
+</header>
+
+<section>
+    <h2>¿Qué es la programación numérica?</h2>
+    <p>
+        La programación numérica es una técnica utilizada para controlar máquinas herramienta
+        mediante códigos numéricos, que permiten automatizar y optimizar procesos de fabricación.
+        A través de instrucciones precisas, se puede dirigir el movimiento y operación de la maquinaria,
+        mejorando la precisión, eficiencia y repetibilidad en la producción industrial.
+    </p>
+</section>
+
+<section>
+    <h2>Visión del estudiante</h2>
+    <p>
+        Ser una profesional competente y comprometida con el desarrollo tecnológico y la innovación,
+        aportando soluciones eficientes en el campo de la ingeniería y la programación numérica.
+    </p>
+</section>
+
+<section>
+    <h2>Misión del estudiante</h2>
+    <p>
+        Formarme integralmente en conocimientos técnicos y habilidades prácticas para contribuir
+        al avance y mejora de los procesos productivos, aplicando técnicas modernas de programación numérica.
+    </p>
+</section>
+
+<section>
+    <h2>Unidad 1 - Subir trabajos</h2>
+    <form>
+        <label for="unidad1">Selecciona el archivo de la Unidad 1:</label>
+        <input type="file" id="unidad1" name="unidad1" />
+        <button type="submit">Subir</button>
+    </form>
+</section>
+
+<section>
+    <h2>Unidad 2 - Subir trabajos</h2>
+    <form>
+        <label for="unidad2">Selecciona el archivo de la Unidad 2:</label>
+        <input type="file" id="unidad2" name="unidad2" />
+        <button type="submit">Subir</button>
+    </form>
+</section>
+
+<footer>
+    <p>© 2025 Leydy Griselda Aguilar Ccopa</p>
+</footer>
+
+</body>
+</html>
