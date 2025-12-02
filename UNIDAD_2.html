@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidad II - Trabajos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .header h1 {
+            color: #764ba2;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .btn-volver {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-weight: bold;
+        }
+
+        .btn-volver:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .trabajos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .trabajo-card {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .trabajo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .trabajo-card h3 {
+            color: #5e35b1;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .trabajo-card p {
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .codigo-container {
+            background: #1e1e1e;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            position: relative;
+        }
+
+        .codigo-container pre {
+            color: #d4d4d4;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .codigo-container code {
+            color: #9cdcfe;
+        }
+
+        .btn-descargar {
+            display: inline-block;
+            padding: 10px 25px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .btn-descargar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(245, 87, 108, 0.4);
+        }
+
+        .btn-toggle-codigo {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-toggle-codigo:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+
+        .codigo-oculto {
+            display: none;
+        }
+
+        .etiqueta {
+            display: inline-block;
+            background: rgba(94, 53, 177, 0.2);
+            color: #5e35b1;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            margin: 5px 5px 10px 0;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .trabajos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="btn-volver">← Volver al inicio</a>
+        
+        <div class="header">
+            <h1>📚 Unidad II: Métodos Avanzados y Aplicaciones</h1>
+        </div>
+
+        <div class="trabajos-grid">
+            <!-- Trabajo 1 -->
+            <div class="trabajo-card">
+                <h3>Trabajo 1: Integración Numérica</h3>
+                <div class="etiqueta">Python</div>
+                <div class="etiqueta">Método de Simpson</div>
+                <p>Implementación del método de Simpson para el cálculo aproximado de integrales definidas.</p>
+                
+                <button class="btn-toggle-codigo" onclick="toggleCodigo('codigo1')">Ver Código</button>
+                
+                <div id="codigo1" class="codigo-container codigo-oculto">
+                    <pre><code>import numpy as np
+
+def simpson_1_3(f, a, b, n):
+    """
+    Regla de Simpson 1/3 para integración numérica
+    f: función a integrar
+    a, b: límites de integración
+    n: número de subintervalos (debe ser par)
+    """
+    if n % 2 != 0:
+        raise ValueError("n debe ser par")
+    
+    h = (b - a) / n
+    x = np.linspace(a, b, n+1)
+    y = f(x)
+    
+    # Aplicar regla de Simpson
+    resultado = y[0] + y[-1]
+    resultado += 4 * np.sum(y[1:-1:2])
+    resultado += 2 * np.sum(y[2:-1:2])
+    resultado *= h / 3
+    
+    return resultado
+
+# Ejemplo: integrar x^2 de 0 a 1
+f = lambda x: x**2
+integral = simpson_1_3(f, 0, 1, 100)
+print(f"Resultado: {integral}")
+print(f"Valor exacto: {1/3}")</code></pre>
+                </div>
+                
+                <a href="#" class="btn-descargar" download>📄 Descargar PDF</a>
+            </div>
+
+            <!-- Trabajo 2 -->
+            <div class="trabajo-card">
+                <h3>Trabajo 2: Ecuaciones Diferenciales</h3>
+                <div class="etiqueta">Python</div>
+                <div class="etiqueta">Runge-Kutta</div>
+                <p>Solución numérica de ecuaciones diferenciales ordinarias usando el método de Runge-Kutta de 4to orden.</p>
+                
+                <button class="btn-toggle-codigo" onclick="toggleCodigo('codigo2')">Ver Código</button>
+                
+                <div id="codigo2" class="codigo-container codigo-oculto">
+                    <pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+def runge_kutta_4(f, y0, t0, tf, h):
+    """
+    Método de Runge-Kutta de 4to orden
+    f: dy/dt = f(t, y)
+    y0: condición inicial
+    t0, tf: tiempo inicial y final
+    h: tamaño de paso
+    """
+    n = int((tf - t0) / h)
+    t = np.linspace(t0, tf, n+1)
+    y = np.zeros(n+1)
+    y[0] = y0
+    
+    for i in range(n):
+        k1 = h * f(t[i], y[i])
+        k2 = h * f(t[i] + h/2, y[i] + k1/2)
+        k3 = h * f(t[i] + h/2, y[i] + k2/2)
+        k4 = h * f(t[i] + h, y[i] + k3)
+        
+        y[i+1] = y[i] + (k1 + 2*k2 + 2*k3 + k4) / 6
+    
+    return t, y
+
+# Ejemplo: dy/dt = -2y, y(0) = 1
+f = lambda t, y: -2*y
+t, y = runge_kutta_4(f, 1.0, 0, 2, 0.1)
+
+plt.plot(t, y, 'b-', label='Numérico')
+plt.plot(t, np.exp(-2*t), 'r--', label='Exacto')
+plt.legend()
+plt.show()</code></pre>
+                </div>
+                
+                <a href="#" class="btn-descargar" download>📄 Descargar PDF</a>
+            </div>
+
+            <!-- Trabajo 3 -->
+            <div class="trabajo-card">
+                <h3>Trabajo 3: Ajuste de Curvas</h3>
+                <div class="etiqueta">Python</div>
+                <div class="etiqueta">Mínimos Cuadrados</div>
+                <p>Implementación del método de mínimos cuadrados para el ajuste de datos experimentales.</p>
+                
+                <button class="btn-toggle-codigo" onclick="toggleCodigo('codigo3')">Ver Código</button>
+                
+                <div id="codigo3" class="codigo-container codigo-oculto">
+                    <pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+def minimos_cuadrados(x, y, grado):
+    """
+    Ajuste polinomial por mínimos cuadrados
+    x, y: datos experimentales
+    grado: grado del polinomio
+    """
+    # Crear matriz de Vandermonde
+    A = np.vander(x, grado + 1)
+    
+    # Resolver sistema normal
+    coef = np.linalg.lstsq(A, y, rcond=None)[0]
+    
+    return coef
+
+# Ejemplo
+x = np.array([0, 1, 2, 3, 4, 5])
+y = np.array([1.0, 2.1, 3.9, 6.2, 8.8, 12.1])
+
+coef = minimos_cuadrados(x, y, 2)
+print("Coeficientes:", coef)
+
+# Graficar
+x_fit = np.linspace(0, 5, 100)
+y_fit = np.polyval(coef, x_fit)
+
+plt.scatter(x, y, color='red', label='Datos')
+plt.plot(x_fit, y_fit, 'b-', label='Ajuste')
+plt.legend()
+plt.show()</code></pre>
+                </div>
+                
+                <a href="#" class="btn-descargar" download>📄 Descargar PDF</a>
+            </div>
+
+            <!-- Puedes agregar más trabajos aquí -->
+        </div>
+    </div>
+
+    <script>
+        function toggleCodigo(id) {
+            const elemento = document.getElementById(id);
+            if (elemento.classList.contains('codigo-oculto')) {
+                elemento.classList.remove('codigo-oculto');
+            } else {
+                elemento.classList.add('codigo-oculto');
+            }
+        }
+    </script>
+</body>
+</html>
