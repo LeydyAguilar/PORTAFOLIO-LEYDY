@@ -188,38 +188,33 @@
                 <button class="btn-toggle-codigo" onclick="toggleCodigo('codigo1')">Ver Código</button>
                 
                 <div id="codigo1" class="codigo-container codigo-oculto">
-                    <pre><code>import numpy as np
+                    <pre><code>import re
 
-def newton_raphson(f, df, x0, tol=1e-6, max_iter=100):
-    """
-    Método de Newton-Raphson
-    f: función
-    df: derivada de la función
-    x0: aproximación inicial
-    """
-    x = x0
-    for i in range(max_iter):
-        fx = f(x)
-        if abs(fx) < tol:
-            print(f"Convergió en {i} iteraciones")
-            return x
-        
-        dfx = df(x)
-        if dfx == 0:
-            print("Derivada cero. No se puede continuar.")
-            return None
-        
-        x = x - fx / dfx
-    
-    print("No convergió en el máximo de iteraciones")
-    return x
+def analizar_funcion(funcion):
+    funcion = funcion.replace(" ", "")
+    variables = sorted(set(re.findall(r'[a-zA-Z]', funcion)))
+    terminos = re.findall(r'[+-]?\d*[a-zA-Z]?\^?\d*', funcion)
+    terminos = [t for t in terminos if t]
+    coeficientes = []
+    signos = []
+    for t in terminos:
+        if t.startswith('-'):
+            signos.append('-')
+        else:
+            signos.append('+')
+        c = re.findall(r'[+-]?\d+', t)
+        if c:
+            coef = int(c[0])
+        else:
+            coef = -1 if t.startswith('-') else 1
+        coeficientes.append(coef)
+    print(f"\n🔹 Función ingresada: {funcion}")
+    print(f"🔸 Variables encontradas: {variables}")
+    print(f"🔸 Términos: {terminos}")
+    print(f"🔸 Coeficientes: {coeficientes}")
+    print(f"🔸 Signos: {signos}")
 
-# Ejemplo: encontrar raíz de x^2 - 4
-f = lambda x: x**2 - 4
-df = lambda x: 2*x
-
-raiz = newton_raphson(f, df, 1.0)
-print(f"Raíz encontrada: {raiz}")</code></pre>
+print("=== ANALIZADOR DE FUNCIONES ALGEBRAICAS ===")</code></pre>
                 </div>
                 
                 <a href="TRABAJO_DE_PROGRAMACION_NUMERICA_JOB.pdf" target="_blank" class="btn-descargar">
