@@ -1,248 +1,273 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Programación Numérica - Leydy Griselda Aguilar Ccopa</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio - Programación Numérica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 100vh;
-      padding: 20px;
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-      overflow: hidden;
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
 
-    header {
-      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-      color: white;
-      padding: 40px 30px;
-      text-align: center;
-    }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #667eea;
+        }
 
-    header h1 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    }
+        h1 {
+            color: #764ba2;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-    .info-academica {
-      background: rgba(255, 255, 255, 0.2);
-      padding: 20px;
-      border-radius: 10px;
-      margin-top: 20px;
-    }
+        .info-principal {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 25px;
+            border-radius: 20px;
+            margin: 20px 0;
+            color: white;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
 
-    .info-academica p {
-      margin: 8px 0;
-      font-size: 1.1em;
-    }
+        .info-principal p {
+            margin: 10px 0;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
 
-    .contenido {
-      padding: 40px 30px;
-    }
+        .info-principal strong {
+            color: #fff59d;
+        }
 
-    .seccion {
-      margin-bottom: 40px;
-    }
+        .seccion {
+            margin: 30px 0;
+            padding: 25px;
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
 
-    .seccion h2 {
-      color: #667eea;
-      font-size: 1.8em;
-      margin-bottom: 15px;
-      border-bottom: 3px solid #4facfe;
-      padding-bottom: 10px;
-    }
+        .seccion h2 {
+            color: #5e35b1;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+        }
 
-    .seccion p {
-      line-height: 1.8;
-      color: #555;
-      text-align: justify;
-      margin-bottom: 15px;
-    }
+        .seccion h2::before {
+            content: "✨";
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
 
-    .vision-mision {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
-    }
+        .seccion p {
+            line-height: 1.8;
+            color: #333;
+            font-size: 1.05em;
+        }
 
-    .card {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
+        .vision-mision {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
 
-    .card h3 {
-      font-size: 1.5em;
-      margin-bottom: 15px;
-      border-bottom: 2px solid rgba(255, 255, 255, 0.5);
-      padding-bottom: 10px;
-    }
+        .card-vm {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-    .unidades {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-      gap: 30px;
-      margin-top: 30px;
-    }
+        .card-vm:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+        }
 
-    .unidad {
-      background: #f8f9fa;
-      padding: 30px;
-      border-radius: 10px;
-      border-left: 5px solid #4facfe;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    }
+        .card-vm h3 {
+            color: #d84315;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
 
-    .unidad h3 {
-      color: #667eea;
-      font-size: 1.5em;
-      margin-bottom: 20px;
-    }
+        .unidades {
+            margin-top: 40px;
+        }
 
-    .lista-trabajos {
-      list-style: none;
-      counter-reset: trabajo-counter;
-    }
+        .unidades h2 {
+            text-align: center;
+            color: #764ba2;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
 
-    .lista-trabajos li {
-      margin-bottom: 15px;
-      padding-left: 10px;
-    }
+        .unidades-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
 
-    .lista-trabajos a {
-      color: #667eea;
-      text-decoration: none;
-      font-size: 1.1em;
-      transition: all 0.3s ease;
-      display: inline-block;
-    }
+        .unidad-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
 
-    .lista-trabajos a:hover {
-      color: #4facfe;
-      transform: translateX(5px);
-    }
+        .unidad-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
 
-    footer {
-      background: #2c3e50;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9em;
-    }
+        .unidad-card:hover::before {
+            left: 100%;
+        }
 
-    @media (max-width: 768px) {
-      header h1 {
-        font-size: 1.8em;
-      }
+        .unidad-card:hover {
+            transform: scale(1.08) rotate(2deg);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
 
-      .unidades {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+        .unidad-card h3 {
+            color: white;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .unidad-card p {
+            color: #f0f0f0;
+            font-size: 1.1em;
+        }
+
+        .unidad-card .numero {
+            font-size: 4em;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.3);
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #667eea;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .seccion h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>💻 PROGRAMACIÓN NUMÉRICA</h1>
-      <div class="info-academica">
-        <p><strong>📚 Docente:</strong> FRED CRUZ TORRES</p>
-        <p><strong>👩‍🎓 Estudiante:</strong> LEYDY GRISELDA AGUILAR CCOPA</p>
-      </div>
-    </header>
+    <div class="container">
+        <header>
+            <h1>📚 Portafolio de Programación Numérica</h1>
+        </header>
 
-    <div class="contenido">
-      <!-- Descripción del Curso -->
-      <section class="seccion">
-        <h2>📖 Descripción del Curso</h2>
-        <p>
-          El curso de <strong>Programación Numérica</strong> es una asignatura fundamental que combina los principios matemáticos con la implementación computacional para resolver problemas complejos que no tienen solución analítica directa. A través de este curso, los estudiantes aprenden a desarrollar algoritmos eficientes para encontrar raíces de ecuaciones, resolver sistemas lineales y no lineales, interpolar datos, y aplicar métodos de optimización numérica.
-        </p>
-        <p>
-          Se estudian métodos iterativos como Bisección, Newton-Raphson, Secante, entre otros, aplicándolos mediante lenguajes de programación modernos. El curso enfatiza tanto la teoría matemática subyacente como su implementación práctica, desarrollando habilidades esenciales para la ingeniería, ciencias computacionales y análisis de datos.
-        </p>
-      </section>
+        <div class="info-principal">
+            <p><strong>Curso:</strong> Programación Numérica</p>
+            <p><strong>Docente:</strong> Fred Cruz Torres</p>
+            <p><strong>Estudiante:</strong> Leydy Griselda Aguilar Ccopa</p>
+        </div>
 
-      <!-- Visión y Misión -->
-      <section class="seccion">
-        <h2>🎯 Visión y Misión del Estudiante</h2>
+        <div class="seccion">
+            <h2>¿Qué es la Programación Numérica?</h2>
+            <p>
+                La Programación Numérica es una rama fundamental de las ciencias de la computación que se enfoca en el desarrollo e implementación de algoritmos para resolver problemas matemáticos mediante métodos computacionales. Esta disciplina abarca el análisis de errores, la aproximación de funciones, la resolución de sistemas de ecuaciones, la integración y diferenciación numérica, así como la optimización de procesos. Es una herramienta esencial en ingeniería, física, economía y muchas otras áreas donde los problemas del mundo real requieren soluciones numéricas precisas y eficientes.
+            </p>
+        </div>
+
         <div class="vision-mision">
-          <div class="card">
-            <h3>👁️ Visión</h3>
-            <p>
-              Convertirme en una profesional altamente capacitada en el ámbito de la programación numérica y las ciencias computacionales, contribuyendo al desarrollo tecnológico mediante la implementación de soluciones innovadoras que integren métodos matemáticos avanzados con herramientas computacionales modernas.
-            </p>
-          </div>
-          <div class="card">
-            <h3>🚀 Misión</h3>
-            <p>
-              Desarrollar competencias sólidas en métodos numéricos y su aplicación práctica, manteniendo un compromiso constante con el aprendizaje continuo, la excelencia académica y la ética profesional. Aplicar estos conocimientos para resolver problemas reales que impacten positivamente en la sociedad y la industria.
-            </p>
-          </div>
-        </div>
-      </section>
+            <div class="card-vm">
+                <h3>💡 Mi Visión</h3>
+                <p>
+                    Convertirme en una profesional altamente capacitada en el campo de la programación numérica, aplicando métodos computacionales innovadores para resolver problemas complejos del mundo real. Aspiro a contribuir al desarrollo tecnológico mediante la implementación de algoritmos eficientes que optimicen procesos en diferentes industrias.
+                </p>
+            </div>
 
-      <!-- Unidades -->
-      <section class="seccion">
-        <h2>📚 Trabajos por Unidad</h2>
+            <div class="card-vm">
+                <h3>🎯 Mi Misión</h3>
+                <p>
+                    Desarrollar competencias sólidas en programación numérica a través del estudio riguroso, la práctica constante y la aplicación de conocimientos teóricos en proyectos prácticos. Me comprometo a mantener una actitud de aprendizaje continuo, explorando nuevas técnicas y herramientas que me permitan crecer profesional y personalmente en este campo.
+                </p>
+            </div>
+        </div>
+
         <div class="unidades">
-          <!-- UNIDAD 1 -->
-          <div class="unidad">
-            <h3>📘 UNIDAD 1</h3>
-            <ol class="lista-trabajos">
-              <!-- ✅ AQUÍ PUEDES AGREGAR TUS LINKS DE LA UNIDAD 1 -->
-              <!-- Ejemplo: <li><a href="TU_LINK_AQUI" target="_blank">1️⃣ Nombre de tu trabajo</a></li> -->
-              <li><a href="https://github.com/LeydyAguilar/PORTAFOLIO-LEYDY/blob/main/identificador_lineal.py" target="_blank">1️⃣ IDENTIFICADOR_LINEAL</a></li>
-              <li><a href="https://github.com/LeydyAguilar/PORTAFOLIO-LEYDY/blob/main/GRAFICADOR_LINEAL.py" target="_blank">2️⃣ GRAFICADOR LINEAL </a></li>
-              <li><a href="https://github.com/LeydyAguilar/PORTAFOLIO-LEYDY/blob/main/EJERCICIOS_PROPUESTOS.py" target="_blank">3️⃣ EJERCICIOS PROPUESTOS</a></li>
-              <li><a href="https://github.com/LeydyAguilar/PORTAFOLIO-LEYDY/blob/main/M%C3%A9todo%20de%20la%20secante.pdf" target="_blank">4️⃣ METODO SECANTE</a></li>
-              <li><a href="https://github.com/LeydyAguilar/PORTAFOLIO-LEYDY/blob/main/METODO_RAPSON.py" target="_blank">4️⃣ METODO RAPSON</a></li>
-              
-            </ol>
-          </div>
+            <h2>📖 Unidades del Curso</h2>
+            <div class="unidades-grid">
+                <a href="UNIDAD_1.html" class="unidad-card">
+            <span class="numero">1</span>
+            <h3>Unidad I</h3>
+            <p>Fundamentos y Métodos Básicos</p>
+        </a>
 
-          <!-- UNIDAD 2 -->
-          <div class="unidad">
-            <h3>📗 UNIDAD 2</h3>
-            <ol class="lista-trabajos">
-              <!-- ✅ AQUÍ PUEDES AGREGAR TUS LINKS DE LA UNIDAD 2 -->
-              <!-- Ejemplo: <li><a href="TU_LINK_AQUI" target="_blank">1️⃣ Nombre de tu trabajo</a></li> -->
-              <li><a href="https://github.com/tuusuario/proyecto4" target="_blank">1️⃣ SIN TRABAJOS</a></li>
-              
-            </ol>
-          </div>
+        <a href="UNIDAD_2.html" class="unidad-card">
+            <span class="numero">2</span>
+            <h3>Unidad II</h3>
+            <p>Métodos Avanzados y Aplicaciones</p>
+        </a>
+            </div>
         </div>
-      </section>
+
+        <footer>
+            <p>© 2024 - Leydy Griselda Aguilar Ccopa | Programación Numérica</p>
+        </footer>
     </div>
 
-    <footer>
-      <p>© 2025 - Leydy Griselda Aguilar Ccopa | Programación Numérica</p>
-      <p>Universidad - Carrera Profesional</p>
-    </footer>
-  </div>
+    <script>
+        function irAUnidad(numero) {
+            // Redirige a la página de la unidad correspondiente
+            window.location.href = `unidad${numero}.html`;
+        }
+    </script>
 </body>
 </html>
-
-
-
-
-
