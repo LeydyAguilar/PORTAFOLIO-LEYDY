@@ -109,7 +109,7 @@
             color: #9cdcfe;
         }
 
-        .btn-descargar {
+        .btn-descargar, .btn-ver-pdf {
             display: inline-block;
             padding: 10px 25px;
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
@@ -117,11 +117,12 @@
             text-decoration: none;
             border-radius: 20px;
             margin-top: 15px;
+            margin-right: 10px;
             transition: all 0.3s ease;
             font-weight: bold;
         }
 
-        .btn-descargar:hover {
+        .btn-descargar:hover, .btn-ver-pdf:hover {
             transform: scale(1.05);
             box-shadow: 0 8px 20px rgba(245, 87, 108, 0.4);
         }
@@ -135,6 +136,7 @@
             cursor: pointer;
             font-weight: bold;
             margin-bottom: 10px;
+            margin-right: 10px;
             transition: all 0.3s ease;
         }
 
@@ -156,6 +158,10 @@
             font-size: 0.85em;
             margin: 5px 5px 10px 0;
             font-weight: bold;
+        }
+
+        .botones-container {
+            margin-top: 15px;
         }
 
         @media (max-width: 768px) {
@@ -180,145 +186,548 @@
         <div class="trabajos-grid">
             <!-- Trabajo 1 -->
             <div class="trabajo-card">
-                <h3>Trabajo 1: Integración Numérica</h3>
+                <h3>Trabajo 1: INDICE H</h3>
                 <div class="etiqueta">Python</div>
-                <div class="etiqueta">Método de Simpson</div>
-                <p>Implementación del método de Simpson para el cálculo aproximado de integrales definidas.</p>
+                <div class="etiqueta"> DOCENTES CON INDICE ALTO</div>
+                <p>El índice H (o índice de Hirsch) es un indicador utilizado para medir la productividad científica y el impacto de un investigador, grupo o institución. Se basa en la cantidad de publicaciones y el número de citas que estas reciben. Un autor tiene un índice H igual a h si ha publicado h artículos que han sido citados al menos h veces cada uno.</p>
                 
-                <button class="btn-toggle-codigo" onclick="toggleCodigo('codigo1')">Ver Código</button>
-                
-                <div id="codigo1" class="codigo-container codigo-oculto">
-                    <pre><code>import numpy as np
-
-def simpson_1_3(f, a, b, n):
-    """
-    Regla de Simpson 1/3 para integración numérica
-    f: función a integrar
-    a, b: límites de integración
-    n: número de subintervalos (debe ser par)
-    """
-    if n % 2 != 0:
-        raise ValueError("n debe ser par")
-    
-    h = (b - a) / n
-    x = np.linspace(a, b, n+1)
-    y = f(x)
-    
-    # Aplicar regla de Simpson
-    resultado = y[0] + y[-1]
-    resultado += 4 * np.sum(y[1:-1:2])
-    resultado += 2 * np.sum(y[2:-1:2])
-    resultado *= h / 3
-    
-    return resultado
-
-# Ejemplo: integrar x^2 de 0 a 1
-f = lambda x: x**2
-integral = simpson_1_3(f, 0, 1, 100)
-print(f"Resultado: {integral}")
-print(f"Valor exacto: {1/3}")</code></pre>
+                <div class="botones-container">
+                    <a href="#" class="btn-ver-pdf">📄 Ver PDF</a>
+                    <a href="#" class="btn-descargar" download>📥 Descargar PDF</a>
                 </div>
-                
-                <a href="#" class="btn-descargar" download>📄 Descargar PDF</a>
             </div>
 
             <!-- Trabajo 2 -->
             <div class="trabajo-card">
-                <h3>Trabajo 2: Ecuaciones Diferenciales</h3>
+                <h3>Trabajo 2: METODO DE BISECCION</h3>
                 <div class="etiqueta">Python</div>
-                <div class="etiqueta">Runge-Kutta</div>
-                <p>Solución numérica de ecuaciones diferenciales ordinarias usando el método de Runge-Kutta de 4to orden.</p>
+                <p>El método de bisección es un procedimiento iterativo empleado para encontrar una raíz real de una función continua f(x) dentro de un intervalo cerrado [a, b] en el cual la función cambia de signo, es decir, f(a) · f(b) < 0. El método se fundamenta en el teorema del valor intermedio, que garantiza la existencia de al menos una raíz en dicho intervalo.</p>
                 
                 <button class="btn-toggle-codigo" onclick="toggleCodigo('codigo2')">Ver Código</button>
                 
                 <div id="codigo2" class="codigo-container codigo-oculto">
-                    <pre><code>import numpy as np
-import matplotlib.pyplot as plt
-
-def runge_kutta_4(f, y0, t0, tf, h):
-    """
-    Método de Runge-Kutta de 4to orden
-    f: dy/dt = f(t, y)
-    y0: condición inicial
-    t0, tf: tiempo inicial y final
-    h: tamaño de paso
-    """
-    n = int((tf - t0) / h)
-    t = np.linspace(t0, tf, n+1)
-    y = np.zeros(n+1)
-    y[0] = y0
+                    <pre><code>
+# Método de Bisección 
+def biseccion(f, a, b, tol=1e-6, max_iter=100): 
+    """ 
+    Encuentra la raíz usando el método de bisección 
+    f: función 
+    a, b: intervalo inicial [a, b] 
+    tol: tolerancia 
+    max_iter: número máximo de iteraciones 
+    """ 
+    print("\n=== MÉTODO DE BISECCIÓN ===") 
     
-    for i in range(n):
-        k1 = h * f(t[i], y[i])
-        k2 = h * f(t[i] + h/2, y[i] + k1/2)
-        k3 = h * f(t[i] + h/2, y[i] + k2/2)
-        k4 = h * f(t[i] + h, y[i] + k3)
+    # Verificar que hay cambio de signo 
+    if f(a) * f(b) > 0: 
+        print("Error: f(a) y f(b) deben tener signos opuestos") 
+        return None 
+    
+    print(f"{'Iter':<6} {'a':<15} {'b':<15} {'c':<15} {'f(c)':<15} {'Error':<15}") 
+    print("-" * 90) 
+    
+    for i in range(max_iter): 
+        c = (a + b) / 2 
+        fc = f(c) 
+        error = abs(b - a) / 2 
         
-        y[i+1] = y[i] + (k1 + 2*k2 + 2*k3 + k4) / 6
+        print(f"{i+1:<6} {a:<15.8f} {b:<15.8f} {c:<15.8f} {fc:<15.8e} {error:<15.8e}") 
+        
+        if error < tol or abs(fc) < tol: 
+            print(f"\nConvergió en {i+1} iteraciones") 
+            print(f"Raíz aproximada: x = {c:.8f}") 
+            return c 
+        
+        # Actualizar intervalo 
+        if f(a) * fc < 0: 
+            b = c 
+        else: 
+            a = c 
     
-    return t, y
-
-# Ejemplo: dy/dt = -2y, y(0) = 1
-f = lambda t, y: -2*y
-t, y = runge_kutta_4(f, 1.0, 0, 2, 0.1)
-
-plt.plot(t, y, 'b-', label='Numérico')
-plt.plot(t, np.exp(-2*t), 'r--', label='Exacto')
-plt.legend()
-plt.show()</code></pre>
+    print(f"\nNo convergió en {max_iter} iteraciones") 
+return c 
+# Ejemplo de uso: Encontrar raíz de x^2 - 2 = 0 
+def f(x): 
+return x**2 - 2 
+# Ejecutar 
+raiz = biseccion(f, 1, 2) )</code></pre>
                 </div>
                 
-                <a href="#" class="btn-descargar" download>📄 Descargar PDF</a>
+                <div class="botones-container">
+                    <a href="#" class="btn-ver-pdf">📄 Ver PDF</a>
+                    <a href="#" class="btn-descargar" download>📥 Descargar PDF</a>
+                </div>
             </div>
 
             <!-- Trabajo 3 -->
             <div class="trabajo-card">
-                <h3>Trabajo 3: Ajuste de Curvas</h3>
+                <h3>Trabajo 3: METODO DE LA SECANTE</h3>
                 <div class="etiqueta">Python</div>
-                <div class="etiqueta">Mínimos Cuadrados</div>
-                <p>Implementación del método de mínimos cuadrados para el ajuste de datos experimentales.</p>
+                <div class="etiqueta">METODO DE LA SECANTE</div>
+                <p>El método de la Secante es un procedimiento numérico iterativo empleado para aproximar las raíces reales de una función continua f(x). A diferencia del método de Newton-Raphson, este método no requiere el cálculo de la derivada analítica, ya que la pendiente se aproxima usando dos puntos consecutivos cercanos a la raíz.</p>
                 
                 <button class="btn-toggle-codigo" onclick="toggleCodigo('codigo3')">Ver Código</button>
                 
                 <div id="codigo3" class="codigo-container codigo-oculto">
-                    <pre><code>import numpy as np
-import matplotlib.pyplot as plt
-
-def minimos_cuadrados(x, y, grado):
-    """
-    Ajuste polinomial por mínimos cuadrados
-    x, y: datos experimentales
-    grado: grado del polinomio
-    """
-    # Crear matriz de Vandermonde
-    A = np.vander(x, grado + 1)
+                    <pre><code>
+# Método de la Secante 
+def secante(f, x0, x1, tol=1e-6, max_iter=100): 
+""" 
+Encuentra la raíz usando el método de la secante 
+f: función 
+x0, x1: dos valores iniciales 
+tol: tolerancia 
+max_iter: número máximo de iteraciones 
+    """ 
+    print("\n=== MÉTODO DE LA SECANTE ===") 
+    print(f"{'Iter':<6} {'x_n-1':<15} {'x_n':<15} {'x_n+1':<15} {'f(x_n+1)':<15} {'Error':<15}") 
+    print("-" * 95) 
     
-    # Resolver sistema normal
-    coef = np.linalg.lstsq(A, y, rcond=None)[0]
+    for i in range(max_iter): 
+        fx0 = f(x0) 
+        fx1 = f(x1) 
+        
+        # Evitar división por cero 
+        if abs(fx1 - fx0) < 1e-12: 
+            print("\nError: División por cero") 
+            return x1 
+        
+        # Fórmula de la secante 
+        x2 = x1 - fx1 * (x1 - x0) / (fx1 - fx0) 
+        fx2 = f(x2) 
+        error = abs(x2 - x1) 
+        
+        print(f"{i+1:<6} {x0:<15.8f} {x1:<15.8f} {x2:<15.8f} {fx2:<15.8e} {error:<15.8e}") 
+        
+        if error < tol or abs(fx2) < tol: 
+            print(f"\nConvergió en {i+1} iteraciones") 
+            print(f"Raíz aproximada: x = {x2:.8f}") 
+            return x2 
     
-    return coef
+        # Actualizar valores 
+        x0 = x1 
+        x1 = x2 
+    
+    print(f"\nNo convergió en {max_iter} iteraciones") 
+    return x2 
 
-# Ejemplo
-x = np.array([0, 1, 2, 3, 4, 5])
-y = np.array([1.0, 2.1, 3.9, 6.2, 8.8, 12.1])
+# Ejemplo de uso: Encontrar raíz de x^2 - 2 = 0 
+def f(x): 
+    return x**2 - 2 
 
-coef = minimos_cuadrados(x, y, 2)
-print("Coeficientes:", coef)
-
-# Graficar
-x_fit = np.linspace(0, 5, 100)
-y_fit = np.polyval(coef, x_fit)
-
-plt.scatter(x, y, color='red', label='Datos')
-plt.plot(x_fit, y_fit, 'b-', label='Ajuste')
-plt.legend()
-plt.show()</code></pre>
+# Ejecutar 
+raiz = secante(f, 1, 2)()</code></pre>
                 </div>
                 
-                <a href="#" class="btn-descargar" download>📄 Descargar PDF</a>
+                <div class="botones-container">
+                    <a href="#" class="btn-ver-pdf">📄 Ver PDF</a>
+                    <a href="#" class="btn-descargar" download>📥 Descargar PDF</a>
+                </div>
             </div>
 
-            <!-- Puedes agregar más trabajos aquí -->
+            <!-- Trabajo 4 -->
+            <div class="trabajo-card">
+                <h3>Trabajo 4: METODO DE PUNTO FIJO</h3>
+                <div class="etiqueta">Python</div>
+                <div class="etiqueta">metodo de punto fiijo</div>
+                <p>El método del Punto Fijo es una técnica iterativa utilizada para encontrar soluciones aproximadas de ecuaciones no lineales de la forma f(x) = 0. Se basa en reescribir la ecuación en una forma equivalente:</p>
+                
+                <button class="btn-toggle-codigo" onclick="toggleCodigo('codigo4')">Ver Código</button>
+                
+                <div id="codigo4" class="codigo-container codigo-oculto">
+                    <pre><code>def punto_fijo(g, x0, tol=1e-6, max_iter=100): 
+""" 
+    Encuentra la raíz usando el método de punto fijo 
+    g: función de iteración g(x) 
+    x0: valor inicial 
+    tol: tolerancia 
+    max_iter: número máximo de iteraciones 
+    """ 
+    print("\n=== MÉTODO DE PUNTO FIJO ===") 
+    print(f"{'Iter':<6} {'x':<15} {'g(x)':<15} {'Error':<15}") 
+    print("-" * 55) 
+    x = x0 
+    for i in range(max_iter): 
+        x_nuevo = g(x) 
+        error = abs(x_nuevo - x) 
+        
+        print(f"{i+1:<6} {x:<15.8f} {x_nuevo:<15.8f} {error:<15.8e}")   
+        if error < tol: 
+            print(f"\nConvergió en {i+1} iteraciones") 
+            print(f"Raíz aproximada: x = {x_nuevo:.8f}") 
+            return x_nuevo 
+        x = x_nuevo 
+    print(f"\nNo convergió en {max_iter} iteraciones") 
+    return x 
+def g(x): 
+    return (x + 2/x) / 2 
+# Ejecutar con un valor inicial cercano a sqrt(2) 
+raiz = punto_fijo(g, 1.5)</code></pre>
+                </div>
+                
+                <div class="botones-container">
+                    <a href="#" class="btn-ver-pdf">📄 Ver PDF</a>
+                    <a href="#" class="btn-descargar" download>📥 Descargar PDF</a>
+                </div>
+            </div>
+
+            <!-- Trabajo 5 -->
+            <div class="trabajo-card">
+                <h3>Trabajo 5: METODO DE REGULA FALSI</h3>
+                <div class="etiqueta">Python</div>
+                <p>Implementación del método de mínimos cuadrados para el ajuste de datos experimentales.</p>
+                
+                <button class="btn-toggle-codigo" onclick="toggleCodigo('codigo5')">Ver Código</button>
+                
+                <div id="codigo5" class="codigo-container codigo-oculto">
+                    <pre><code># Método de la Falsa Posición (Regla Falsi) 
+def falsa_posicion(f, a, b, tol=1e-6, max_iter=100): 
+""" 
+    Encuentra la raíz usando el método de falsa posición 
+    f: función 
+    a, b: intervalo inicial [a, b] 
+    tol: tolerancia 
+    max_iter: número máximo de iteraciones 
+    """ 
+    print("\n=== MÉTODO DE LA FALSA POSICIÓN ===") 
+    
+    # Verificar que hay cambio de signo 
+    if f(a) * f(b) > 0: 
+        print("Error: f(a) y f(b) deben tener signos opuestos") 
+        return None 
+     
+    print(f"{'Iter':<6} {'a':<15} {'b':<15} {'c':<15} {'f(c)':<15} {'Error':<15}") 
+    print("-" * 95) 
+     
+    c_anterior = a 
+     
+    for i in range(max_iter): 
+        fa = f(a) 
+        fb = f(b) 
+        
+        # Fórmula de la falsa posición 
+        c = (a * fb - b * fa) / (fb - fa) 
+        fc = f(c) 
+        
+        if i > 0: 
+            error = abs(c - c_anterior) 
+        else: 
+            error = abs(b - a) 
+        
+        print(f"{i+1:<6} {a:<15.8f} {b:<15.8f} {c:<15.8f} {fc:<15.8e} {error:<15.8e}") 
+        
+        if error < tol or abs(fc) < tol: 
+            print(f"\nConvergió en {i+1} iteraciones") 
+            print(f"Raíz aproximada: x = {c:.8f}") 
+            return c 
+        
+        # Actualizar intervalo 
+        if fa * fc < 0: 
+            b = c 
+        else: 
+            a = c 
+        
+        c_anterior = c 
+    
+    print(f"\nNo convergió en {max_iter} iteraciones") 
+    return c 
+# Ejemplo de uso: Encontrar raíz de x^2 - 2 = 0 
+def f(x): 
+return x**2 - 2 
+# Ejecutar 
+raiz = falsa_posicion(f, 1, 2)</code></pre>
+                </div>
+                
+                <div class="botones-container">
+                    <a href="#" class="btn-ver-pdf">📄 Ver PDF</a>
+                    <a href="#" class="btn-descargar" download>📥 Descargar PDF</a>
+                </div>
+            </div>
+
+            <!-- Trabajo 6 -->
+            <div class="trabajo-card">
+                <h3>Trabajo 6: GRADIENTE DE UNA FUNCION</h3>
+                <div class="etiqueta">R</div>
+                <div class="etiqueta">con 1 variable</div>
+                <p>El método de la gradiente es una técnica que busca el valor que minimiza una función avanzando paso a paso en la dirección donde esta disminuye más rápido. Usa la pendiente de la función para guiar el camino hacia el mínimo. Es simple, eficiente y muy usado en optimización.</p>
+                
+                <button class="btn-toggle-codigo" onclick="toggleCodigo('codigo6')">Ver Código</button>
+                
+                <div id="codigo6" class="codigo-container codigo-oculto">
+                    <pre><code># -------------------------------------
+# MÉTODO DEL GRADIENTE CON INFORME
+# -------------------------------------
+
+# Función objetivo (puedes cambiarla)
+f <- function(x) {
+return( (x - 3)^2 + 4 )
+}
+
+# Derivada (gradiente)
+grad_f <- function(x) {
+  return( 2 * (x - 3) )
+}
+
+# Método del gradiente con impresión de iteraciones
+gradient_descent <- function(x_inicial, tasa_aprendizaje = 0.1, max_iter = 50) {
+
+x <- x_inicial
+
+cat("INICIO DEL MÉTODO DEL GRADIENTE\n")
+cat("Valor inicial: ", x, "\n")
+cat("------------------------------------------\n")
+
+for (i in 1:max_iter) {
+    
+    gradiente <- grad_f(x)
+    x_nuevo <- x - tasa_aprendizaje * gradiente
+    
+    cat("Iteración", i, ": x =", x_nuevo, " | gradiente =", gradiente, "\n")
+    
+    # Si el cambio es muy pequeño, paramos
+    if (abs(x_nuevo - x) < 1e-6) {
+    cat("\nConvergencia alcanzada en", i, "iteraciones.\n")
+    return(list(minimo_aprox = x_nuevo, iteraciones = i))
+    }
+    
+    x <- x_nuevo
+}
+
+cat("\nMáximo de iteraciones alcanzado: ", max_iter, "\n")
+
+return(list(minimo_aprox = x, iteraciones = max_iter))
+}
+
+# -------------------------------------
+# EJECUCIÓN
+# -------------------------------------
+resultado <- gradient_descent(
+x_inicial = 10,
+tasa_aprendizaje = 0.1,
+max_iter = 40
+)
+
+cat("\n------------------------------------------\n")
+cat("Mínimo aproximado: ", resultado$minimo_aprox, "\n")
+cat("Iteraciones usadas: ", resultado$iteraciones, "\n")</code></pre>
+                </div>
+                
+                <div class="botones-container">
+                    <a href="#" class="btn-ver-pdf">📄 Ver PDF</a>
+                    <a href="#" class="btn-descargar" download>📥 Descargar PDF</a>
+                </div>
+            </div>
+
+            <!-- Trabajo 7 -->
+            <div class="trabajo-card">
+                <h3>Trabajo 7: ANALISIS DEL ARTICULO</h3>
+                <div class="etiqueta">R</div>
+                <div class="etiqueta">diferencias </div>
+                <p>El objetivo de esta prueba fue evaluar la eficiencia computacional del método de regresión lineal de R (lm) en comparación con el algoritmo de gradiente descendente. Se emplearon conjuntos de datos de diferentes tamaños (100 a 10,000 observaciones) y se registraron el tiempo de ejecución (en segundos) y el uso de memoria (en bytes) mediante la librería bench. Ambos métodos fueron implementados bajo las mismas condiciones para garantizar una comparación justa.</p>
+                
+                <button class="btn-toggle-codigo" onclick="toggleCodigo('codigo7a')">Ver Código 1</button>
+                <button class="btn-toggle-codigo" onclick="toggleCodigo('codigo7b')">Ver Código 2</button>
+                
+                <div id="codigo7a" class="codigo-container codigo-oculto">
+                    <pre><code>f  
+<- function(x) (x + 1)^2 
+df <- function(x) 2 * (x + 1) 
+x <- 5 
+alpha <- 0.3 
+tol <- 1e-6 
+max_iter <- 20 
+iter <- 0 
+historial <- data.frame(iter = numeric(), x = numeric(), f_x = numeric()) 
+repeat { 
+iter <- iter + 1 
+grad <- df(x) 
+x_new <- x - alpha * grad 
+historial <- rbind(historial, data.frame(iter = iter, x = x_new, f_x = f(x_new))) 
+if (abs(grad) < tol || iter >= max_iter) break 
+x <- x_new 
+} 
+# Resultado final 
+cat("      
+RESULTADOS DEL MÉTODO DEL GRADIENTE\n") 
+cat("----------------------------------------\n") 
+cat("  
+cat("  
+Iteraciones realizadas:", iter, "\n") 
+Mínimo aproximado en x =", round(x_new, 6), "\n") 
+cat("  
+Valor mínimo f(x) =", round(f(x_new), 6), "\n\n") 
+cat("  
+Tabla de iteraciones:\n") 
+print(historial) 
+plot(historial$iter, historial$f_x, type = "o", pch = 19, col = "blue", 
+main = "Convergencia del Método del Gradiente (f(x) = (x + 1)^2)", 
+xlab = "Iteraciones", ylab = "f(x)") 
+grid()</code></pre>
+                </div>
+
+                <div id="codigo7b" class="codigo-container codigo-oculto">
+                    <pre><code># Instalación de profvis si no lo tienes 
+# install.packages("profvis") 
+library(profvis) 
+# Datos simulados 
+set.seed(123) 
+n <- 10000 
+x <- runif(n, 0, 10) 
+y <- 3*x + 5 + rnorm(n, 0, 2) 
+#  Función OLS 
+ols_fun <- function(x, y) { 
+modelo <- lm(y ~ x) 
+return(modelo) 
+} 
+#  Función Gradient Descent 
+gd_fun <- function(x, y, alpha = 0.00001, iter_max = 5000) { 
+m <- 0 
+b <- 0 
+n <- length(y) 
+for (i in 1:iter_max) { 
+y_pred <- m*x + b 
+dm <- (-2/n) * sum(x * (y - y_pred)) 
+db <- (-2/n) * sum(y - y_pred) 
+m <- m - alpha * dm 
+b <- b - alpha * db 
+} 
+return(list(m = m, b = b)) 
+} 
+#  Medimos el tiempo de procesamiento 
+cat("==== MÉTODO OLS ====\n") 
+tiempo_ols <- system.time({ 
+modelo_ols <- ols_fun(x, y) 
+}) 
+print(tiempo_ols) 
+cat("\n==== MÉTODO GRADIENTE DESCENDENTE ====\n") 
+tiempo_gd <- system.time({ 
+modelo_gd <- gd_fun(x, y) 
+}) 
+print(tiempo_gd) 
+cat("\n RESULTADOS COMPARATIVOS:\n") 
+cat("Tiempo OLS: ", round(tiempo_ols["elapsed"], 5), "segundos\n") 
+cat("Tiempo GD : ", round(tiempo_gd["elapsed"], 5), "segundos\n") 
+cat("\nCoeficientes:\n") 
+cat("OLS -> pendiente:", coef(modelo_ols)[2], " intercepto:", coef(modelo_ols)[1], "\n") 
+cat("GD  -> pendiente:", modelo_gd$m, " intercepto:", modelo_gd$b, "\n") 
+profvis({ 
+ols_fun(x, y) 
+gd_fun(x, y) 
+})</code></pre>
+                </div>
+                
+                <div class="botones-container">
+                    <a href="#" class="btn-ver-pdf">📄 Ver PDF</a>
+                    <a href="#" class="btn-descargar" download>📥 Descargar PDF</a>
+                </div>
+            </div>
+
+            <!-- Trabajo 8 -->
+            <div class="trabajo-card">
+                <h3>Trabajo 8: JUEGO DE SUPERVIVENCIA</h3>
+                <div class="etiqueta">R</div>
+                <div class="etiqueta">bucles y iteraciones</div>
+                <p>El siguiente trabajo presenta la simulación de un juego cooperativo en el que varios jugadores comparten una bolsa de caramelos de tres tipos: A, B y C. El objetivo es que, mediante combinaciones e intercambios, el grupo logre formar al menos un chupetín (D) por cada jugador.</p>
+                
+                <button class="btn-toggle-codigo" onclick="toggleCodigo('codigo8')">Ver Código</button>
+                
+                <div id="codigo8" class="codigo-container codigo-oculto">
+                    <pre><code>------------------------------------------------------------------------------------------------------------------------------ 
+set.seed(123) 
+ 
+# Función de simulación 
+simular_paletas <- function() { 
+  # Cada estudiante tiene conteo de A, B, C y Paletas (P) 
+  estudiantes <- vector("list", 9) 
+  for (i in 1:9) estudiantes[[i]] <- c(A=0, B=0, C=0, P=0) 
+   
+  iteraciones <- 0 
+   
+  while (TRUE) { 
+    iteraciones <- iteraciones + 1 
+     
+    # Cada estudiante recibe 2 caramelos aleatorios 
+    for (i in 1:9) { 
+      nuevos <- sample(c("A", "B", "C"), 2, replace = TRUE) 
+      for (candy in nuevos) estudiantes[[i]][candy] <- estudiantes[[i]][candy] + 1 
+    } 
+     
+    # Evaluar canjes por paletas y posibles devoluciones 
+    for (i in 1:9) { 
+      # Número de tríos A,B,C disponibles 
+      sets <- min(estudiantes[[i]][c("A", "B", "C")]) 
+       
+      if (sets >= 2) { 
+        # Dos sets: 1 paleta + 1 caramelo aleatorio 
+        estudiantes[[i]]["P"] <- estudiantes[[i]]["P"] + 1 
+        estudiantes[[i]][c("A","B","C")] <- estudiantes[[i]][c("A","B","C")] - 2 
+        bonus <- sample(c("A", "B", "C"), 1) 
+        estudiantes[[i]][bonus] <- estudiantes[[i]][bonus] + 1 
+      } else if (sets == 1) { 
+        # Un set: 1 paleta 
+        estudiantes[[i]]["P"] <- estudiantes[[i]]["P"] + 1 
+        estudiantes[[i]][c("A","B","C")] <- estudiantes[[i]][c("A","B","C")] - 1 
+    } 
+    
+    # Si devuelve una paleta, recibe 3 caramelos aleatorios 
+    if (estudiantes[[i]]["P"] >= 1 && runif(1) < 0.3) {  # 30% de probabilidad 
+        estudiantes[[i]]["P"] <- estudiantes[[i]]["P"] - 1 
+        devolucion <- sample(c("A","B","C"), 3, replace = TRUE) 
+        for (candy in devolucion) estudiantes[[i]][candy] <- estudiantes[[i]][candy] + 1  } 
+    } 
+    
+    # Verificar si los 9 tienen al menos una paleta 
+    paletas_totales <- sapply(estudiantes, function(e) e["P"]) 
+    if (all(paletas_totales >= 1)) break 
+} 
+
+return(iteraciones) 
+} 
+
+# Ejecutar simulaciones 
+n_rep <- 300 
+resultados <- replicate(n_rep, simular_paletas()) 
+
+# Resultados 
+cat("Promedio de iteraciones necesarias:", mean(resultados), "\n") 
+
+# Visualización 
+hist(resultados,  
+main="Distribución de iteraciones necesarias", 
+xlab="Iteraciones",  
+col="lightgreen", border="white")</code></pre>
+                </div>
+                
+                <div class="botones-container">
+                    <a href="#" class="btn-ver-pdf">📄 Ver PDF</a>
+                    <a href="#" class="btn-descargar" download>📥 Descargar PDF</a>
+                </div>
+            </div>
+
+            <!-- Trabajo 9 -->
+            <div class="trabajo-card">
+                <h3>Trabajo 9: RESUMEN DEL ARTICULO</h3>
+                <div class="etiqueta">R</div>
+                <div class="etiqueta">RESUMEN</div>
+                <p>El artículo aborda uno de los principales retos en el procesamiento de imágenes médicas: el registro preciso de imágenes deformadas. Este proceso permite alinear múltiples imágenes de un mismo paciente, obtenidas en distintas modalidades o momentos, para mejorar el diagnóstico, el seguimiento de enfermedades y la planificación de tratamientos. Aunque las transformaciones rígidas (traslación y rotación) son útiles en casos simples, la mayoría de escenarios clínicos requieren métodos no rígidos capaces de modelar deformaciones anatómicas complejas.</p>
+                <div class="botones-container">
+                    <a href="#" class="btn-ver-pdf">📄 Ver PDF</a>
+                    <a href="#" class="btn-descargar" download>📥 Descargar PDF</a>
+                </div>
+            </div>
+
+            <!-- Trabajo 10 -->
+            <div class="trabajo-card">
+                <h3>Trabajo 10: DIFERENCIACION NUMERICA</h3>
+                <div class="etiqueta">R</div>
+                <p>La diferenciación numérica permite aproximar la derivada de una función a partir de valores discretos, es decir, mediante datos tabulados o resultados experimentales. Matemáticamente, </p>
+                
+                
+                <div class="botones-container">
+                    <a href="#" class="btn-ver-pdf">📄 Ver PDF</a>
+                    <a href="#" class="btn-descargar" download>📥 Descargar PDF</a>
+                </div>
+            </div>
         </div>
     </div>
 
