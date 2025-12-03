@@ -217,51 +217,82 @@ def analizar_funcion(funcion):
 print("=== ANALIZADOR DE FUNCIONES ALGEBRAICAS ===")</code></pre>
                 </div>
                 
-                <a href="TRABAJO_DE_PROGRAMACION_NUMERICA_JOB.pdf" target="_blank" class="btn-descargar">
-📖 Ver PDF
-</a>
-
+                <a href="TRABAJO_DE_PROGRAMACION_NUMERICA_JOB.pdf" target="_blank" class="btn-descargar">📖 Ver PDF</a>
             </div>
 
             <!-- Trabajo 2 -->
             <div class="trabajo-card">
-                <h3>Trabajo 2: Interpolación Polinomial</h3>
+                <h3>Trabajo 2: GRAFICADOR DE SISTEMAS LINEALES</h3>
                 <div class="etiqueta">Python</div>
                 <div class="etiqueta">Lagrange</div>
-                <p>Implementación del método de interpolación polinomial de Lagrange para aproximar valores intermedios.</p>
+                <p>se desarrollo un programa en Python capaz de reconocer dos funciones lineales y generar sus respectivos gráficos, para lo cual el limite de unidades por cada coordenada en el plano cartesiano es de 20 unidades y no se utilizaron librerias especializadas de Python.</p>
                 
                 <button class="btn-toggle-codigo" onclick="toggleCodigo('codigo2')">Ver Código</button>
                 
                 <div id="codigo2" class="codigo-container codigo-oculto">
-                    <pre><code>import numpy as np
-import matplotlib.pyplot as plt
+                    <pre><code>def preparar_expresion(expr: str) -> str:
+    expr = expr.replace(" ", "")          # quitar espacios
+    expr = expr.replace("^", "")        # potencia
+    expr = expr.replace("-x", "-1*x")     # caso -x
+    expr = expr.replace("+x", "+1*x")     # caso +x
+    if expr.startswith("x"):              # si empieza con x
+        expr = "1*" + expr
+    expr = expr.replace("x", "*x")        # poner multiplicación
+    expr = expr.replace("**x", "*x")      # corregir si se duplicó
+    return expr
 
-def interpolacion_lagrange(x, y, xi):
-    """
-    Interpolación polinomial de Lagrange
-    x: puntos conocidos (x)
-    y: valores conocidos (y)
-    xi: punto a interpolar
-    """
-    n = len(x)
-    resultado = 0
-    
-    for i in range(n):
-        termino = y[i]
-        for j in range(n):
-            if i != j:
-                termino *= (xi - x[j]) / (x[i] - x[j])
-        resultado += termino
-    
-    return resultado
+# Pedimos las dos funciones
+func1 = input("Ingrese la primera función (ejemplo: 2x+1): ")
+func2 = input("Ingrese la segunda función (ejemplo: -x+3): ")
 
-# Ejemplo
-x = np.array([0, 1, 2, 3])
-y = np.array([1, 3, 2, 5])
-xi = 1.5
+func1 = preparar_expresion(func1)
+func2 = preparar_expresion(func2)
 
-yi = interpolacion_lagrange(x, y, xi)
-print(f"Valor interpolado en x={xi}: {yi}")</code></pre>
+# Definimos el rango del gráfico (valores de X y Y)
+xmin, xmax = -20, 20
+ymin, ymax = -20, 20
+
+# Recorremos los valores de Y de arriba hacia abajo
+for y in range(ymax, ymin - 1, -1):
+    linea = ""
+
+    for x in range(xmin, xmax + 1):
+        try:
+            y1 = eval(func1, {"x": x})
+        except:
+            y1 = None
+        try:
+            y2 = eval(func2, {"x": x})
+        except:
+            y2 = None
+
+        cond1 = (y1 is not None and abs(y - y1) < 0.5)
+        cond2 = (y2 is not None and abs(y - y2) < 0.5)
+
+        if cond1 and cond2:
+            linea += "#"
+        elif cond1:
+            linea += "*"
+        elif cond2:
+            linea += "o"
+        elif x == 0 and y == 0:
+            linea += "+"
+        elif x == 0:
+            linea += "|"
+        elif y == 0:
+            linea += "-"
+        else:
+            linea += " "
+    print(linea)
+
+# Leyenda
+print("\nLeyenda del gráfico:")
+print("  * = Función 1")
+print("  o = Función 2")
+print("  # = Intersección")
+print("  | = Eje Y")
+print("  - = Eje X")
+print("  + = Origen (0,0)")</code></pre>
                 </div>
                 
                 <a href="#" class="btn-descargar" download>📄 Descargar PDF</a>
@@ -269,91 +300,222 @@ print(f"Valor interpolado en x={xi}: {yi}")</code></pre>
 
             <!-- Trabajo 3 -->
             <div class="trabajo-card">
-                <h3>Trabajo 3: Eliminación Gaussiana</h3>
+                <h3>Trabajo 3: RESTRICCIONES Y SISTEMAS DE ECUACIONES</h3>
                 <div class="etiqueta">Python</div>
                 <div class="etiqueta">Sistemas Lineales</div>
-                <p>Resolución de sistemas de ecuaciones lineales mediante el método de eliminación gaussiana con pivoteo.</p>
+                <p>Las restricciones son condiciones que limitan el conjunto de valores posibles que pueden tomar las variables en un problema. Estas son esenciales en problemas de optimización y en sistemas de ecuaciones, ya que definen la región factible, es decir, el espacio de soluciones posibles. En ese sentido se proponen 5 ejercicios que deben ser desarrollados utilizando las restricciones y el código del anterior trabajo para realizar una representación gráfica.</p>
                 
                 <button class="btn-toggle-codigo" onclick="toggleCodigo('codigo3')">Ver Código</button>
                 
                 <div id="codigo3" class="codigo-container codigo-oculto">
                     <pre><code>import numpy as np
+import matplotlib.pyplot as plt
 
-def eliminacion_gaussiana(A, b):
-    """
-    Resuelve Ax = b usando eliminación gaussiana
-    """
-    n = len(b)
-    Ab = np.column_stack([A, b]).astype(float)
-    
-    # Eliminación hacia adelante
-    for i in range(n):
-        # Pivoteo parcial
-        max_row = i + np.argmax(np.abs(Ab[i:, i]))
-        Ab[[i, max_row]] = Ab[[max_row, i]]
-        
-        for j in range(i+1, n):
-            factor = Ab[j, i] / Ab[i, i]
-            Ab[j, i:] -= factor * Ab[i, i:]
-    
-    # Sustitución hacia atrás
-    x = np.zeros(n)
-    for i in range(n-1, -1, -1):
-        x[i] = (Ab[i, -1] - np.dot(Ab[i, i+1:n], x[i+1:])) / Ab[i, i]
-    
-    return x
+plt.style.use('seaborn-v0_8-darkgrid')
 
-# Ejemplo
-A = np.array([[2, 1, -1], [-3, -1, 2], [-2, 1, 2]])
-b = np.array([8, -11, -3])
-solucion = eliminacion_gaussiana(A, b)
-print("Solución:", solucion)</code></pre>
+def ejercicio1():
+    # Max 8x + 12y
+    # Restricciones: x + y ≤ 15, x ≥ 5, x, y ≥ 0
+    x = np.linspace(0, 15, 100)
+    y = 15 - x
+    x_opt, y_opt = 5, 10
+    z_opt = 8*x_opt + 12*y_opt
+
+    plt.figure(figsize=(6, 5))
+    plt.fill_between(x, 0, y, where=(x >= 5), alpha=0.3, color='lightgreen', label='Región factible')
+    plt.plot(x, y, 'k-', label='x + y = 15')
+    plt.axvline(5, color='orange', linestyle='--', label='x = 5')
+    plt.plot(x_opt, y_opt, 'ro', label='Solución óptima')
+    plt.title(f'Ejercicio 1: 8x + 12y máx = {z_opt}')
+    plt.xlabel('x (Front-end)')
+    plt.ylabel('y (Back-end)')
+    plt.legend()
+    plt.show()
+
+def ejercicio2():
+    # Max 12x + 6y
+    # Restricciones: 40x + 20y ≤ 520, x + y ≥ 2, x,y ≥ 0
+    x = np.linspace(0, 15, 100)
+    y = (520 - 40*x) / 20
+    x_opt, y_opt = 13, 0  # mejor RAM
+    z_opt = 12*x_opt + 6*y_opt
+
+    plt.figure(figsize=(6, 5))
+    plt.fill_between(x, 0, y, alpha=0.3, color='lightgreen', label='Región factible')
+    plt.plot(x, y, 'k-', label='40x + 20y = 520')
+    plt.axhline(2, color='orange', linestyle='--', label='x + y ≥ 2')
+    plt.plot(x_opt, y_opt, 'ro', label='Solución óptima')
+    plt.title(f'Ejercicio 2: 12x + 6y máx = {z_opt}')
+    plt.xlabel('x (Servidores A)')
+    plt.ylabel('y (Servidores B)')
+    plt.legend()
+    plt.show()
+
+def ejercicio3():
+    # Max 15x + 20y
+    # Restricciones: x + y ≤ 12, x ≥ 4, y ≥ 6
+    x = np.linspace(0, 12, 100)
+    y = 12 - x
+    x_opt, y_opt = 6, 6
+    z_opt = 15*x_opt + 20*y_opt
+
+    plt.figure(figsize=(6, 5))
+    plt.fill_between(x, 6, y, where=(x >= 4) & (y >= 6), alpha=0.3, color='lightgreen', label='Región factible')
+    plt.plot(x, y, 'k-', label='x + y = 12')
+    plt.axvline(4, color='orange', linestyle='--', label='x = 4')
+    plt.axhline(6, color='purple', linestyle='--', label='y = 6')
+    plt.plot(x_opt, y_opt, 'ro', label='Solución óptima')
+    plt.title(f'Ejercicio 3: 15x + 20y máx = {z_opt}')
+    plt.xlabel('x (Reuniones)')
+    plt.ylabel('y (Documentación)')
+    plt.legend()
+    plt.show()
+
+def ejercicio4():
+    # Max 50x + 30y
+    # Restricciones: 5x + 3y ≤ 18, x ≤ 3
+    x = np.linspace(0, 4, 100)
+    y = (18 - 5*x) / 3
+    x_opt, y_opt = 3, 1
+    z_opt = 50*x_opt + 30*y_opt
+
+    plt.figure(figsize=(6, 5))
+    plt.fill_between(x, 0, y, where=(x <= 3), alpha=0.3, color='lightgreen', label='Región factible')
+    plt.plot(x, y, 'k-', label='5x + 3y = 18')
+    plt.axvline(3, color='orange', linestyle='--', label='x ≤ 3')
+    plt.plot(x_opt, y_opt, 'ro', label='Solución óptima')
+    plt.title(f'Ejercicio 4: 50x + 30y máx = {z_opt}')
+    plt.xlabel('x (Modelos 3D)')
+    plt.ylabel('y (Texturas 2D)')
+    plt.legend()
+    plt.show()
+
+def ejercicio5():
+    # Max 100x + 180y
+    # Restricciones: 5x + 10y ≤ 50
+    x = np.linspace(0, 11, 100)
+    y = (50 - 5*x) / 10
+    x_opt, y_opt = 0, 5
+    z_opt = 100*x_opt + 180*y_opt
+
+    plt.figure(figsize=(6, 5))
+    plt.fill_between(x, 0, y, alpha=0.3, color='lightgreen', label='Región factible')
+    plt.plot(x, y, 'k-', label='5x + 10y = 50')
+    plt.plot(x_opt, y_opt, 'ro', label='Solución óptima')
+    plt.title(f'Ejercicio 5: 100x + 180y máx = {z_opt}')
+    plt.xlabel('x (Tipo A)')
+    plt.ylabel('y (Tipo B)')
+    plt.legend()
+    plt.show()
+
+# Menú principal
+def main():
+    ejercicios = [ejercicio1, ejercicio2, ejercicio3, ejercicio4, ejercicio5]
+    for i, f in enumerate(ejercicios, 1):
+        print(f"\nMostrando Ejercicio {i}...")
+        f()
+        input("Presiona Enter para continuar...")</code></pre>
                 </div>
                 
                 <a href="#" class="btn-descargar" download>📄 Descargar PDF</a>
             </div>
 
-            <!-- Puedes agregar más trabajos aquí -->
+            <!-- Trabajo 4 -->
             <div class="trabajo-card">
-                <h3>Trabajo 3: Eliminación Gaussiana</h3>
+                <h3>Trabajo 4: MÉTODO DE LA SECANTE</h3>
+                <div class="etiqueta">Python</div>
+                <div class="etiqueta">MÉTODO DE SECANTE</div>
+                <p>El método de la secante es una técnica numérica usada para encontrar, de manera aproximada, el valor donde una función se hace cero. En lugar de utilizar derivadas o cálculos complicados, este método se basa en ir probando valores y ajustándolos poco a poco.
+
+La idea principal es tomar dos puntos iniciales donde la función cambia de comportamiento y trazar una línea recta imaginaria entre ellos. Esa línea sirve como una guía para adivinar un nuevo valor que esté más cerca de la respuesta correcta. Luego, el proceso se repite usando los puntos más recientes, permitiendo que el cálculo se vaya afinando en cada paso.
+
+El método de la secante es atractivo porque suele ser rápido, simple y eficiente, especialmente cuando no se puede calcular una derivada. Aunque no siempre garantiza llegar a la solución, cuando funciona bien permite obtener aproximaciones muy precisas con relativamente pocos pasos.</p>
+                
+                <a href="archivos/ejercicio.pdf" target="_blank" class="btn-descargar">📖 Ver PDF</a>
+                <a href="archivos/ejercicio.pdf" class="btn-descargar" download>📄 Descargar PDF</a>
+            </div>
+
+            <!-- Trabajo 5 -->
+            <div class="trabajo-card">
+                <h3>Trabajo 5: MÉTODO DE NEWTON RAPHSON</h3>
                 <div class="etiqueta">Python</div>
                 <div class="etiqueta">Sistemas Lineales</div>
-                <p>Resolución de sistemas de ecuaciones lineales mediante el método de eliminación gaussiana con pivoteo.</p>
+                <p>El método de Newton-Raphson es un procedimiento iterativo utilizado para encontrar aproximaciones sucesivas de las raíces reales de una función continua y derivable. Su fundamento radica en el desarrollo del polinomio de Taylor de primer orden alrededor de un punto inicial x₀, lo cual permite estimar el punto donde la función corta el eje x mediante la siguiente fórmula recursiva: xₙ₊₁ = xₙ - f(xₙ) / f'(xₙ). En cada iteración, el método utiliza la pendiente de la tangente en el punto xₙ para aproximarse progresivamente hacia la raíz. Si la función es suficientemente suave y el punto inicial se elige adecuadamente, la convergencia suele ser rápida y cuadrática.</p>
                 
-                <button class="btn-toggle-codigo" onclick="toggleCodigo('codigo3')">Ver Código</button>
+                <button class="btn-toggle-codigo" onclick="toggleCodigo('codigo5')">Ver Código</button>
                 
-                <div id="codigo3" class="codigo-container codigo-oculto">
-                    <pre><code>import numpy as np
+                <div id="codigo5" class="codigo-container codigo-oculto">
+                    <pre><code>import math
 
-def eliminacion_gaussiana(A, b):
-    """
-    Resuelve Ax = b usando eliminación gaussiana
-    """
-    n = len(b)
-    Ab = np.column_stack([A, b]).astype(float)
-    
-    # Eliminación hacia adelante
-    for i in range(n):
-        # Pivoteo parcial
-        max_row = i + np.argmax(np.abs(Ab[i:, i]))
-        Ab[[i, max_row]] = Ab[[max_row, i]]
-        
-        for j in range(i+1, n):
-            factor = Ab[j, i] / Ab[i, i]
-            Ab[j, i:] -= factor * Ab[i, i:]
-    
-    # Sustitución hacia atrás
-    x = np.zeros(n)
-    for i in range(n-1, -1, -1):
-        x[i] = (Ab[i, -1] - np.dot(Ab[i, i+1:n], x[i+1:])) / Ab[i, i]
-    
-    return x
+# ===================================================
+# MÉTODO DE NEWTON-RAPHSON (O RAPHSON SIMPLE)
+# ===================================================
+def newton_raphson(f, df, x0, tol=1e-6, max_iter=100):
+    x = x0
 
-# Ejemplo
-A = np.array([[2, 1, -1], [-3, -1, 2], [-2, 1, 2]])
-b = np.array([8, -11, -3])
-solucion = eliminacion_gaussiana(A, b)
-print("Solución:", solucion)</code></pre>
+    print("\n" + "="*65)
+    print(" MÉTODO DE NEWTON-RAPHSON - TABLA DE ITERACIONES ")
+    print("="*65)
+    print(f"{'Iter':<6}{'x':<15}{'f(x)':<15}{'f\'(x)':<15}{'Error':<15}")
+    print("-"*65)
+
+    for i in range(1, max_iter + 1):
+        fx = f(x)
+        dfx = df(x)
+
+        if abs(dfx) < 1e-10:
+            print("⚠  Error: Derivada muy pequeña. Deteniendo el método.")
+            break
+
+        x_nuevo = x - fx / dfx
+        error = abs(x_nuevo - x)
+
+        print(f"{i:<6}{x:<15.8f}{fx:<15.8f}{dfx:<15.8f}{error:<15.8e}")
+
+        if error < tol:
+            print("-"*65)
+            print(f"✅ Convergencia alcanzada en {i} iteraciones.")
+            print("="*65)
+            return x_nuevo, i
+
+        x = x_nuevo
+
+    print("-"*65)
+    print(f"⚠  No se alcanzó la tolerancia después de {max_iter} iteraciones.")
+    print("="*65)
+    return x, max_iter
+
+
+# ===================================================
+# PROGRAMA PRINCIPAL (INTERACTIVO)
+# ===================================================
+if __name__ == "__main__":
+    print("🔹 MÉTODO DE NEWTON-RAPHSON 🔹")
+    print("Puedes usar funciones como: sin(x), cos(x), exp(x), log(x), etc.\n")
+
+    # Entrada del usuario
+    func_str = input("👉 Ingresa f(x): ")
+    dfunc_str = input("👉 Ingresa f'(x): ")
+    x0 = float(input("👉 Ingresa el valor inicial x₀: "))
+
+    # Crear funciones a partir del texto ingresado
+    def f(x):
+        return eval(func_str, {"x": x, "math": math, **math.__dict__})
+
+    def df(x):
+        return eval(dfunc_str, {"x": x, "math": math, **math.__dict__})
+
+    # Ejecutar el método
+    raiz, iteraciones = newton_raphson(f, df, x0)
+
+    # Resultados finales
+    print(f"\n{'='*65}")
+    print(" RESULTADOS FINALES ")
+    print("="*65)
+    print(f"✨ Raíz aproximada: x = {raiz:.10f}")
+    print(f"✨ f(raíz) = {f(raiz):.6e}")
+    print(f"🔁 Iteraciones realizadas: {iteraciones}")
+    print("="*65)</code></pre>
                 </div>
                 
                 <a href="#" class="btn-descargar" download>📄 Descargar PDF</a>
