@@ -1,0 +1,123 @@
+/* ===== ESTILO GENERAL ===== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #120d1c; /* negro con tono morado */
+    color: #f5e9ff;
+    margin: 0;
+    padding: 30px;
+}
+
+/* ===== TITULO PRINCIPAL ===== */
+h1 {
+    text-align: center;
+    background-color: #e8c6f2; /* morado pastel */
+    color: #3a1b4f;
+    padding: 18px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+}
+
+/* ===== SUBTITULOS ===== */
+h2 {
+    color: #f4b6d8; /* rosa pastel */
+    margin-top: 35px;
+    margin-bottom: 10px;
+}
+
+/* ===== PARRAFOS ===== */
+p {
+    background-color: #241a36; /* morado oscuro */
+    padding: 15px;
+    border-left: 6px solid #f4b6d8;
+    border-radius: 10px;
+    line-height: 1.7;
+    color: #fbeaff;
+}
+
+/* ===== LISTAS ===== */
+ul {
+    background-color: #241a36;
+    padding: 15px 30px;
+    border-radius: 10px;
+    border-left: 6px solid #c77dff;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+/* ===== BLOQUE DE CODIGO ===== */
+pre {
+    background-color: #1c142b;
+    padding: 20px;
+    border-radius: 12px;
+    overflow-x: auto;
+    border: 2px solid #c77dff;
+    margin-top: 15px;
+}
+
+code {
+    color: #f8e1ff;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+/* ===== FORMULAS ===== */
+p[style] {
+    background-color: #2a1f3d;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+    color: #ffd6f0;
+    font-weight: bold;
+}
+
+/* ===== IMAGEN ===== */
+img {
+    display: block;
+    max-width: 75%;
+    margin: 25px auto;
+    border-radius: 12px;
+    border: 3px solid #e8c6f2;
+    box-shadow: 0 0 20px rgba(244, 182, 216, 0.4);
+}
+
+/* ===== BOTONES PDF ===== */
+a {
+    display: inline-block;
+    margin-top: 20px;
+    margin-right: 15px;
+    padding: 12px 18px;
+    background-color: #f4b6d8;
+    color: #2a1438;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+/* ===== HOVER ===== */
+a:hover {
+    background-color: #d8a1e3;
+    transform: scale(1.08);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+    body {
+        padding: 15px;
+    }
+
+    img {
+        max-width: 100%;
+    }
+
+    h1 {
+        font-size: 1.4em;
+    }
+
+    code {
+        font-size: 0.85em;
+    }
+}

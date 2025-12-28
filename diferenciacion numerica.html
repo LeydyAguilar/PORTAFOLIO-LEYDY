@@ -1,0 +1,92 @@
+    <!DOCTYPE html>
+    <html lang="en">
+        <link rel="stylesheet" href="../CSS/INDICE H.css">
+    <head>
+        
+        <title>diferenciacion numerica</title>
+    </head>
+    <body>
+        <h1>Diferenciacion numerica</h1>
+        <h2>descripcion</h2>
+        <p>
+La diferenciación numérica es una técnica usada para aproximar derivadas de una
+función cuando no se conoce su forma analítica o solo se tienen datos discretos
+(tablas o mediciones).
+</p>
+
+<p>
+La derivada de una función <em>f(x)</em> mide qué tan rápido cambia la función en un punto:
+</p>
+
+<p>
+f′(x) = lím<sub>h→0</sub>
+<span style="display:inline-block; vertical-align:middle;">
+  <span style="border-bottom:1px solid #000; display:block; text-align:center;">
+    f(x + h) − f(x)
+  </span>
+  <span style="display:block; text-align:center;">h</span>
+</span>
+</p>
+
+<p>
+Como en los datos reales no podemos hacer que <em>h → 0</em>, se emplean diferencias finitas:
+</p>
+
+<h3>1.1 Diferencia hacia adelante</h3>
+<p>
+f′(x) ≈
+<span style="display:inline-block; vertical-align:middle;">
+  <span style="border-bottom:1px solid #000; display:block; text-align:center;">
+    f(x + h) − f(x)
+  </span>
+  <span style="display:block; text-align:center;">h</span>
+</span>
+</p>
+
+<p>
+Usa el punto actual y el siguiente. Ideal para el inicio de una tabla de datos.
+</p>
+
+<h3>1.2 Diferencia hacia atrás</h3>
+<p>
+f′(x) ≈
+<span style="display:inline-block; vertical-align:middle;">
+  <span style="border-bottom:1px solid #000; display:block; text-align:center;">
+    f(x) − f(x − h)
+  </span>
+  <span style="display:block; text-align:center;">h</span>
+</span>
+</p>
+
+<p>
+Usa el punto actual y el anterior. Ideal para el final de una tabla.
+</p>
+
+<h3>1.3 Diferencia centrada</h3>
+<p>
+f′(x) ≈
+<span style="display:inline-block; vertical-align:middle;">
+<span style="border-bottom:1px solid #000; display:block; text-align:center;">
+    f(x + h) − f(x − h)
+</span>
+<span style="display:block; text-align:center;">2h</span>
+</span>
+</p>
+
+<p>
+Usa valores a ambos lados del punto, por lo que es más precisa.
+</p>
+
+<h3>1.4 Segunda derivada</h3>
+<p>
+La segunda derivada, que mide la aceleración o curvatura, se calcula como:
+</p>
+
+<p>
+f′′(x) ≈ f(x + h) − 2f(x) + f(x − h)
+</p>
+    
+    <a href="../PDF/programacion_numerica.pdf" target="_blank">Ver PDF</a>
+    <a href="../PDF/programacion_numerica.pdf" download>Descargar PDF</a>
+    </body>
+    </html>

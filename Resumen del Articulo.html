@@ -1,0 +1,50 @@
+    <!DOCTYPE html>
+    <html lang="en">
+        <link rel="stylesheet" href="../CSS/resumenes de articulo.css">
+    <head>
+        
+        <title>resumen</title>
+    </head>
+    <body>
+        <h1>RESUMEN DEL ARTICULO</h1>
+        <h2>Contenido</h2>
+        <p>Non-rigid medical image registration using image field in Demons algorithm
+
+Este artículo nos propone un nuevo algoritmo o método de registro no rígido de imágenes médicas que mejora el clásico algoritmo Demons, ya que nos permite aprovechar mejor la información direccional de las estructuras anatómicas.
+
+El registro de imágenes busca alinear dos o más imágenes del mismo objeto o paciente, tomadas en distintos momentos, ángulos o con diferentes dispositivos.
+
+En medicina, este proceso es clave para comparar imágenes (por ejemplo, resonancia magnética o fotografías de retina) y apoyar diagnósticos.
+
+Existen dos tipos principales de registro:
+
+Rígido: solo aplica traslación y rotación.
+
+No rígido: permite deformaciones, más adecuado para imágenes biológicas.
+
+El algoritmo Demons es uno de los métodos no rígidos más usados por su eficiencia y rapidez, pero solo utiliza información de gradiente ignorando la orientación de las estructuras.
+
+El nuevo método, llamado Field Demons (FD):
+
+Integra el campo de orientación junto con el gradiente.
+
+Aprovecha la dirección de las estructuras anatómicas para estimar mejor las deformaciones.
+
+Simplifica el modelo de deformación y mejora la precisión sin aumentar mucho el tiempo de cálculo.
+
+Su metodología es que primero se calcula el campo de gradiente y el campo de orientación de las imágenes de referencia y consulta; segundo, se obtiene el mapa de diferencia entre ambos; tercero, se estima el campo de deformación combinando la magnitud del gradiente y la dirección del campo de orientación; cuarto, se aplica la deformación al conjunto de píxeles de la imagen consulta; y finalmente se itera el proceso hasta alcanzar una coincidencia óptima.
+
+Ventajas:
+
+Usa la información direccional del campo de orientación, clave para registrar deformaciones complejas.
+
+No requiere puntos de control manuales (como los métodos spline).
+
+Mantiene eficiencia computacional con mejor precisión.</h2>
+    <h2>Prubeas</h2>
+    <img src="../imagenes/resuemne arti1.png" alt="actividad 1">
+    <img src="../imagenes/resuemne arti2.png" alt="actividad 2">
+    <a href="../PDF/resumen del archivo y grafico.pdf" target="_blank">Ver PDF</a>
+    <a href="../PDF/resumen del archivo y grafico.pdf" download>Descargar PDF</a>
+    </body>
+    </html>
