@@ -1,0 +1,52 @@
+    <!DOCTYPE html>
+    <html lang="en">
+        <link rel="stylesheet" href="../CSS/INDICE H.css">
+    <head>
+        
+        <title>GRADIENTE DE UNA FUNCION</title>
+    </head>
+    <body>
+        <h1>GRADIENTE DE UNA FUNCION</h1>
+        <h2>descripcion</h2>
+        <p>El método de la gradiente consiste en busca el valor óptimo de una función ajustando sus
+variables paso a paso, siguiendo la dirección contraria al gradiente, hasta que la pendiente sea
+casi cero.</p>
+    <h2>CODIGO EN R</h2>
+    <PRE><CODE>
+        # f(x) = (x + 1)^2 → mínimo real en x = -1
+f <- function(x) (x + 1)^2
+df <- function(x) 2 * (x + 1)
+x <- 5
+alpha <- 0.3
+tol <- 1e-6
+max_iter <- 20
+iter <- 0
+historial <- data.frame(iter = numeric(), x = numeric(), f_x = numeric())
+repeat {
+ iter <- iter + 1
+ grad <- df(x)
+ x_new <- x - alpha * grad
+ historial <- rbind(historial, data.frame(iter = iter, x = x_new, f_x = f(x_new)))
+
+ if (abs(grad) < tol || iter >= max_iter) break
+ x <- x_new
+}
+# Resultado final
+cat(" RESULTADOS DEL MÉTODO DEL GRADIENTE\n")
+cat("----------------------------------------\n")
+cat(" Iteraciones realizadas:", iter, "\n")
+cat(" Mínimo aproximado en x =", round(x_new, 6), "\n")
+cat(" Valor mínimo f(x) =", round(f(x_new), 6), "\n\n")
+cat(" Tabla de iteraciones:\n")
+print(historial)
+plot(historial$iter, historial$f_x, type = "o", pch = 19, col = "blue",
+ main = "Convergencia del Método del Gradiente (f(x) = (x + 1)^2)",
+ xlab = "Iteraciones", ylab = "f(x)")
+grid()
+    </CODE></PRE>
+    <img src="../imagenes/GRADIENTE R.jpg" alt=" GRADIENTE">
+
+    <a href="../PDF/COMPARACION METODO DE LA GRADIENTE.pdf" target="_blank">Ver PDF</a>
+    <a href="../PDF/COMPARACION METODO DE LA GRADIENTE.pdf" download>Descargar PDF</a>
+    </body>
+    </html>

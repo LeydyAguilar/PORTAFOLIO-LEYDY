@@ -1,0 +1,141 @@
+    <!DOCTYPE html>
+    <html lang="en">
+        <link rel="stylesheet" href="../CSS/INDICE H.css">
+    <head>
+        
+        <title>Analisis de articulo</title>
+    </head>
+    <body>
+        <h1>Unidad II ANALISIS DE ARTICULO</h1>
+        <h2>RESUEMEN</h2>
+        <p>
+El estudio compara dos métodos fundamentales para resolver problemas de regresión lineal:
+la pseudoinversa de Moore–Penrose y el descenso por gradiente. Ambos buscan minimizar
+el error cuadrático medio (OLS), pero difieren en su enfoque: la pseudoinversa proporciona
+una solución exacta y directa, mientras que el descenso por gradiente es un método iterativo
+y aproximado que ajusta los parámetros gradualmente según una tasa de aprendizaje.
+El objetivo del trabajo es analizar bajo qué condiciones cada método es más eficiente en
+términos de tiempo de cómputo, estabilidad numérica y precisión predictiva, considerando
+distintos tamaños de datos, número de variables y niveles de condicionamiento de las
+matrices.
+Metodología
+Se realizaron experimentos con datos sintéticos (controlando tamaño, dimensionalidad y
+grado de condicionamiento) y con datasets reales (California Housing y Diabetes). La
+pseudoinversa se calculó mediante descomposición SVD (función numpy.linalg.pinv) y el
+descenso por gradiente se implementó en su versión batch con tasa de aprendizaje fija
+(α=0.01). Se evaluaron tres métricas principales: tiempo de ejecución, error cuadrático medio
+(MSE) y número de iteraciones.
+Resultados principales
+La pseudoinversa fue mucho más rápida y precisa en todos los experimentos con tamaños
+de datos moderados (hasta 5000 muestras y 50 variables). El descenso por gradiente fue
+más lento y su rendimiento disminuyó drásticamente en datos mal condicionados, donde el
+error aumentó y no alcanzó la convergencia. En datos bien condicionados, ambos métodos
+obtuvieron precisión similar.
+El tiempo de la pseudoinversa crece polinómicamente con la dimensionalidad (O(nd² + d³)),
+mientras que el descenso por gradiente crece linealmente con n y d por iteración (O(k·nd)).
+Para grandes volúmenes de datos (n■10■), el descenso por gradiente o sus variantes (SGD,
+mini-batch) son más prácticos.
+Conclusiones
+La pseudoinversa de Moore–Penrose es preferible para problemas pequeños o medianos,
+incluso con datos mal condicionados: ofrece soluciones exactas, rápidas y estables. El
+descenso por gradiente es más adecuado para datasets masivos, pero requiere
+normalización, ajuste de hiperparámetros y regularización para evitar inestabilidad.
+El estudio recomienda considerar métodos híbridos (usar la pseudoinversa como punto inicial
+para GD) y explorar técnicas regularizadas (Ridge, LASSO) o variantes avanzadas de GD
+(Adam, RMSProp). En síntesis, la pseudoinversa destaca por su exactitud y rapidez en
+tamaños moderados, mientras que el descenso por gradiente ofrece escalabilidad en
+grandes volúmenes de datos.</p>
+    <h2>Actividad 1: CODIGO </h2>
+    <pre><code>
+        # Instalación de profvis (solo si no está instalado)
+# install.packages("profvis")
+library(profvis)
+
+# =========================
+# DATOS SIMULADOS
+# =========================
+set.seed(123)
+n <- 10000
+x <- runif(n, 0, 10)
+y <- 3 * x + 5 + rnorm(n, 0, 2)
+
+# =========================
+# FUNCIÓN OLS
+# =========================
+ols_fun <- function(x, y) {
+  lm(y ~ x)
+}
+
+# =========================
+# FUNCIÓN GRADIENT DESCENT
+# =========================
+gd_fun <- function(x, y, alpha = 0.0001, iter_max = 5000) {
+  m <- 0
+  b <- 0
+  n <- length(y)
+
+  for (i in seq_len(iter_max)) {
+    y_pred <- m * x + b
+    error <- y - y_pred
+
+    dm <- (-2 / n) * sum(x * error)
+    db <- (-2 / n) * sum(error)
+
+    m <- m - alpha * dm
+    b <- b - alpha * db
+  }
+
+  return(list(m = m, b = b))
+}
+
+# =========================
+# MEDICIÓN DE TIEMPOS
+# =========================
+cat("==== MÉTODO OLS ====\n")
+tiempo_ols <- system.time({
+  modelo_ols <- ols_fun(x, y)
+})
+print(tiempo_ols)
+
+cat("\n==== MÉTODO GRADIENTE DESCENDENTE ====\n")
+tiempo_gd <- system.time({
+  modelo_gd <- gd_fun(x, y)
+})
+print(tiempo_gd)
+
+# =========================
+# RESULTADOS
+# =========================
+cat("\n==== RESULTADOS COMPARATIVOS ====\n")
+cat("Tiempo OLS:", round(tiempo_ols["elapsed"], 5), "segundos\n")
+cat("Tiempo GD :", round(tiempo_gd["elapsed"], 5), "segundos\n\n")
+
+cat("Coeficientes:\n")
+cat("OLS -> pendiente:", coef(modelo_ols)[2],
+    "intercepto:", coef(modelo_ols)[1], "\n")
+
+cat("GD  -> pendiente:", modelo_gd$m,
+    "intercepto:", modelo_gd$b, "\n")
+
+# =========================
+# PROFILING CON PROFVIS
+# =========================
+profvis({
+  ols_fun(x, y)
+})
+
+profvis({
+  gd_fun(x, y)
+})
+
+    </code></pre>
+
+    <img src="../imagenes/comparacion profvis.jpg" alt=" COMPARACIO EN R">
+
+    <h2>Actividad 2: RESUMEN HECHO A MANO</h2>
+    <img src="../imagenes/RESUMEN A MANO.png" alt="PAGINA 1">
+    <img src="../imagenes/RESUMEN A MANO.png" alt="PAGINA 2">
+    <a href="../PDF/COMPARACION METODO DE LA GRADIENTE.pdf" target="_blank">Ver PDF</a>
+    <a href="../PDF/COMPARACION METODO DE LA GRADIENTE.pdf" download>Descargar PDF</a>
+    </body>
+    </html>

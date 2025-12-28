@@ -1,0 +1,71 @@
+    <!DOCTYPE html>
+    <html lang="en">
+        <link rel="stylesheet" href="../CSS/metodo biseccion.css">
+    <head>
+        
+        <title>METODO DE BISECCION</title>
+    </head>
+    <body>
+        <h1>Trabajo N° 6 – Método Bisección</h1>
+        <h2>descripcion</h2>
+        <p>El método de bisección es un método numérico que sirve para encontrar una aproximación de
+la raíz (es decir, el valor de x donde f(x)=0) de una función continua.
+Su nombre viene de que divide (“biseca”) un intervalo en dos partes en cada paso.
+El método se basa en el Teorema del Valor Intermedio, el cual dice:
+Si f(x) es continua en un intervalo [a,b] y f(a) y f(b) tienen signos opuestos, entonces
+existe al menos un punto c ∈(a,b) tal que f(c)=0.</p>
+    <h2>Codigo</h2>
+    <pre><code>
+        # Método de Bisección
+def biseccion(f, a, b, tol=1e-6, max_iter=100):
+ """
+ Encuentra la raíz usando el método de bisección
+ f: función
+ a, b: intervalo inicial [a, b]
+ tol: tolerancia
+ max_iter: número máximo de iteraciones
+ """
+ print("\n=== MÉTODO DE BISECCIÓN ===")
+
+ # Verificar que hay cambio de signo
+ if f(a) * f(b) > 0:
+ print("Error: f(a) y f(b) deben tener signos opuestos")
+ return None
+
+ print(f"{'Iter':<6} {'a':<15} {'b':<15} {'c':<15} {'f(c)':<15} {'Error':<15}")
+ print("-" * 90)
+
+ for i in range(max_iter):
+ c = (a + b) / 2
+ fc = f(c)
+ error = abs(b - a) / 2
+
+ print(f"{i+1:<6} {a:<15.8f} {b:<15.8f} {c:<15.8f} {fc:<15.8e} {error:<15.8e}")
+
+ if error < tol or abs(fc) < tol:
+ print(f"\nConvergió en {i+1} iteraciones")
+ print(f"Raíz aproximada: x = {c:.8f}")
+ return c
+
+ # Actualizar intervalo
+ if f(a) * fc < 0:
+ b = c
+ else:
+ a = c
+
+ print(f"\nNo convergió en {max_iter} iteraciones")
+ return c
+# Ejemplo de uso: Encontrar raíz de x^2 - 2 = 0
+def f(x):
+ return x**2 - 2
+# Ejecutar
+raiz = biseccion(f, 1, 2)
+
+    </code></pre>
+
+    
+    <img src="../imagenes/biseccion.png" alt="resultado">
+    <a href="../PDF/METODO BISECCION.pdf" target="_blank">Ver PDF</a>
+    <a href="../PDF/METODO BISECCION.pdf" download>Descargar PDF</a>
+    </body>
+    </html>

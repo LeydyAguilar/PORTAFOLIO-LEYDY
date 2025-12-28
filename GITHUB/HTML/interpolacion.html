@@ -1,0 +1,99 @@
+    <!DOCTYPE html>
+    <html lang="en">
+        <link rel="stylesheet" href="../CSS/INDICE H.css">
+    <head>
+        
+        <title>INTERPOLACION</title>
+    </head>
+    <body>
+        <h1>INTERPOLACION</h1>
+        <h2>descripcion</h2>
+        <h2>Interpolación Lineal</h2>
+<p>
+Es el método más sencillo de interpolación.  
+Consiste en unir dos puntos conocidos mediante una recta y usar esa recta para estimar valores intermedios.
+</p>
+
+<h4>Características:</h4>
+<ul>
+    <li>Fácil de implementar</li>
+    <li>Baja precisión si la función es curva</li>
+    <li>Error pequeño solo en intervalos cortos</li>
+</ul>
+
+<hr>
+
+<h2>Interpolación de Lagrange</h2>
+<p>
+Construye un polinomio único que pasa exactamente por todos los puntos dados.  
+Se basa en polinomios base llamados <strong>polinomios de Lagrange</strong>.
+</p>
+
+<h4>Características:</h4>
+<ul>
+    <li>No requiere resolver sistemas de ecuaciones</li>
+    <li>Funciona bien con pocos puntos</li>
+    <li>Puede presentar oscilaciones con muchos puntos (fenómeno de Runge)</li>
+</ul>
+
+<hr>
+
+<h2>Diferencias Divididas de Newton</h2>
+<p>
+Es una forma eficiente de interpolación polinómica que construye el polinomio de manera incremental
+usando diferencias divididas.
+</p>
+
+<h4>Características:</h4>
+<ul>
+    <li>Permite agregar nuevos puntos fácilmente</li>
+    <li>Computacionalmente eficiente</li>
+    <li>Matemáticamente equivalente al polinomio de Lagrange</li>
+</ul>
+
+<hr>
+
+<h2>Interpolación Cuadrática</h2>
+<p>
+Ajusta un polinomio de grado 2 que pasa por tres puntos conocidos.
+</p>
+
+<h4>Características:</h4>
+<ul>
+    <li>Más precisa que la interpolación lineal</li>
+    <li>Captura curvatura simple</li>
+    <li>Puede presentar errores si la función cambia rápidamente</li>
+</ul>
+
+<hr>
+
+<h2>Splines Cúbicas</h2>
+<p>
+Divide el intervalo en subintervalos y ajusta un polinomio cúbico en cada uno, garantizando continuidad
+en la función y sus derivadas.
+</p>
+
+<h4>Características:</h4>
+<ul>
+    <li>Alta precisión</li>
+    <li>Evita oscilaciones</li>
+    <li>Muy usada en ingeniería y gráficos</li>
+</ul>
+
+<hr>
+
+<h2>Error de Interpolación</h2>
+<p>
+Es la diferencia entre el valor real de la función y el valor interpolado.
+</p>
+
+<h4>Características:</h4>
+<ul>
+    <li>Depende del grado del polinomio</li>
+    <li>Aumenta con intervalos grandes</li>
+    <li>Se puede acotar usando derivadas de orden superior</li>
+</ul>
+    <a href="../PDF/TRABAJO_DE_PROGRAMACION_numerica__LEYDY.pdf" target="_blank">Ver PDF</a>
+    <a href="../PDF/TRABAJO_DE_PROGRAMACION_numerica__LEYDY.pdf" download>Descargar PDF</a>
+    </body>
+    </html>

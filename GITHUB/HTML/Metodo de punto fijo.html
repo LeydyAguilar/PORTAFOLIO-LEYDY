@@ -1,0 +1,90 @@
+    <!DOCTYPE html>
+    <html lang="en">
+        <link rel="stylesheet" href="../CSS/METODO PUNTO FIJO.CSS">
+    <head>
+        
+        <title>METODO DE PUNTO FIJO</title>
+    </head>
+    <body>
+        <h1>Trabajo N° 6 – Método PUNTO FIJO</h1>
+        <h2>descripcion</h2>
+        <p>
+El método de <strong>Punto Fijo</strong> es una técnica iterativa utilizada para encontrar
+soluciones aproximadas a ecuaciones no lineales de la forma:
+</p>
+
+<p style="font-size:18px;">
+f(x) = 0
+</p>
+
+<p>
+Su principio se basa en reescribir la ecuación en una forma equivalente:
+</p>
+
+<p style="font-size:18px;">
+x = g(x)
+</p>
+
+<p>
+De esta manera, la raíz buscada es un punto donde la función <em>g(x)</em> y la recta
+<em>y = x</em> se intersectan, es decir, el punto donde:
+</p>
+
+<p style="font-size:18px;">
+x = g(x)
+</p>
+
+<p>
+A partir de un valor inicial <em>x<sub>0</sub></em>, el método genera una sucesión de
+aproximaciones mediante la ecuación iterativa:
+</p>
+
+<p style="font-size:18px;">
+x<sub>n+1</sub> = g(x<sub>n</sub>)
+</p>
+
+<p>
+El proceso continúa hasta que la diferencia entre dos iteraciones sucesivas sea menor
+que una tolerancia predefinida, lo que indica que se ha alcanzado una convergencia
+aceptable.
+</p>
+
+    <h2>Codigo</h2>
+    <pre><code>
+        def punto_fijo(g, x0, tol=1e-6, max_iter=100):
+"""
+ Encuentra la raíz usando el método de punto fijo
+ g: función de iteración g(x)
+ x0: valor inicial
+ tol: tolerancia
+ max_iter: número máximo de iteraciones
+ """
+ print("\n=== MÉTODO DE PUNTO FIJO ===")
+ print(f"{'Iter':<6} {'x':<15} {'g(x)':<15} {'Error':<15}")
+ print("-" * 55)
+ x = x0
+ for i in range(max_iter):
+ x_nuevo = g(x)
+ error = abs(x_nuevo - x)
+
+ print(f"{i+1:<6} {x:<15.8f} {x_nuevo:<15.8f} {error:<15.8e}")
+ if error < tol:
+ print(f"\nConvergió en {i+1} iteraciones")
+ print(f"Raíz aproximada: x = {x_nuevo:.8f}")
+ return x_nuevo
+ x = x_nuevo
+ print(f"\nNo convergió en {max_iter} iteraciones")
+ return x
+def g(x):
+ return (x + 2/x) / 2
+# Ejecutar con un valor inicial cercano a sqrt(2)
+raiz = punto_fijo(g, 1.5)
+
+    </code></pre>
+
+    
+    <img src="../imagenes/PUNTO FIJO.png" alt="resultado">
+    <a href="../PDF/PUNTO FIJO.pdf" target="_blank">Ver PDF</a>
+    <a href="../PDF/PUNTO FIJO.pdf" download>Descargar PDF</a>
+    </body>
+    </html>

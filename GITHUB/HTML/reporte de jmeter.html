@@ -1,0 +1,84 @@
+    <!DOCTYPE html>
+    <html lang="en">
+        <link rel="stylesheet" href="../CSS/INDICE H.css">
+    <head>
+        
+        <title>IDICIE H</title>
+    </head>
+    <body>
+        <h1>Unidad II indice "H"</h1>
+        <h2>descripcion</h2>
+        <p>
+Este reporte está generado en estilo <strong>Apache JMeter</strong> y resume el análisis del
+<strong>Ejercicio 8.4</strong> sobre gradientes de la función de activación sigmoide, usando
+diferencias centradas y comparación con la derivada analítica.
+</p>
+
+<h2>Resumen del Análisis (Summary Report)</h2>
+
+<table>
+    <tr>
+        <th>Métrica</th>
+        <th>Valor</th>
+    </tr>
+    <tr>
+        <td>σ'(0) numérica</td>
+        <td>0.2311</td>
+    </tr>
+    <tr>
+        <td>σ'(-2) numérica</td>
+        <td>0.11075</td>
+    </tr>
+    <tr>
+        <td>σ'(2) numérica</td>
+        <td>0.11075</td>
+    </tr>
+    <tr>
+        <td>Derivada analítica en 0</td>
+        <td>0.25</td>
+    </tr>
+    <tr>
+        <td>Derivada analítica en -2 y 2</td>
+        <td>0.10499</td>
+    </tr>
+    <tr>
+        <td>h recomendado</td>
+        <td>0.01 o 0.001</td>
+    </tr>
+    <tr>
+        <td>Simetría f'(-x) = f'(x)</td>
+        <td>Cumple</td>
+    </tr>
+</table>
+
+<h2>Descripción del Análisis</h2>
+
+<p>
+Se aplicó el método de <strong>diferencia centrada</strong> con <em>h = 1</em> para estimar derivadas
+de la función sigmoide. Los resultados numéricos fueron cercanos a los valores analíticos; sin embargo,
+se recomienda utilizar un valor de <em>h</em> más pequeño para mejorar la precisión.
+</p>
+
+<p>
+La función mostró simetría, lo que concuerda con la propiedad:
+</p>
+
+<p>
+<strong>σ'(x) = σ'(-x)</strong>
+</p>
+    <h2>Gráfico: Response Time Simulated.Png</h2>
+    <img src="../imagenes/jmeter1.png" alt=" imagen 1">
+
+    <h2>Gráfico: Throughput Simulated.Png</h2>
+    <img src="../imagenes/jmeter2.png" alt="imagen 2">
+
+    <h2>Gráfico: Error Rate Simulated.Png</h2>
+    <img src="../imagenes/jmeter3.png" alt="imagen 3">
+
+    <h2>Gráfico: Scores Summary.Png</h2>
+    <img src="../imagenes/jmeter4.png" alt="imagen 4">
+
+    <a href="../PDF/UNIVERSIDAD NACIONAL DEL ALTIPLANO PUNO.pdf" target="_blank">Ver PDF</a>
+    <a href="../PDF/UNIVERSIDAD NACIONAL DEL ALTIPLANO PUNO.pdf" download>Descargar PDF</a>
+    </body>
+    </html>

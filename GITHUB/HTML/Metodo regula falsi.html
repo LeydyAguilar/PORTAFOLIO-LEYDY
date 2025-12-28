@@ -1,0 +1,147 @@
+    <!DOCTYPE html>
+    <html lang="en">
+        <link rel="stylesheet" href="../CSS/metodo regula falsi.css">
+    <head>
+        
+        <title>METODO DE REGULA FALSI</title>
+    </head>
+    <body>
+        <h1>Trabajo N° 6 – Método REGULA FALSI</h1>
+        <h2>descripcion</h2>
+        <p>
+El método de <strong>Falsa Posición</strong> es un procedimiento numérico iterativo que se utiliza
+para encontrar raíces reales de una ecuación no lineal de la forma:
+</p>
+
+<p style="font-size:18px;">
+f(x) = 0
+</p>
+
+<p>
+Es muy parecido al método de bisección, pero en lugar de tomar el punto medio del intervalo,
+utiliza una interpolación lineal entre los extremos del intervalo para estimar la raíz.
+Esto lo hace más rápido que el método de bisección en muchos casos.
+</p>
+
+<p>
+Si una función continua <em>f(x)</em> cambia de signo entre dos puntos <em>a</em> y <em>b</em>:
+</p>
+
+<p style="font-size:18px;">
+f(a) · f(b) &lt; 0
+</p>
+
+<p>
+entonces existe al menos una raíz en el intervalo <em>[a, b]</em>.
+</p>
+
+<p>
+El método de falsa posición traza una recta (secante) entre los puntos
+<em>(a, f(a))</em> y <em>(b, f(b))</em>, y el punto donde esa recta corta el eje <em>X</em> se toma como
+una nueva aproximación de la raíz.
+</p>
+
+<p>
+El nuevo punto <em>c</em> se calcula como:
+</p>
+
+<p style="font-size:18px;">
+c = b −
+<span style="display:inline-block; vertical-align:middle;">
+  <span style="border-bottom:1px solid black; display:block; text-align:center;">
+    f(b) · (b − a)
+  </span>
+  <span style="display:block; text-align:center;">
+    f(b) − f(a)
+  </span>
+</span>
+</p>
+
+<p>
+o de forma equivalente:
+</p>
+
+<p style="font-size:18px;">
+c = a −
+<span style="display:inline-block; vertical-align:middle;">
+  <span style="border-bottom:1px solid black; display:block; text-align:center;">
+    f(a) · (b − a)
+  </span>
+  <span style="display:block; text-align:center;">
+    f(b) − f(a)
+  </span>
+</span>
+</p>
+
+<p>
+(Esencialmente es la ecuación de la recta secante, aplicada para encontrar la intersección
+con el eje X).
+</p>
+
+
+    <h2>Codigo</h2>
+    <pre><code>
+        # Método de la Falsa Posición (Regla Falsi)
+def falsa_posicion(f, a, b, tol=1e-6, max_iter=100):
+ """
+ Encuentra la raíz usando el método de falsa posición
+ f: función
+ a, b: intervalo inicial [a, b]
+ tol: tolerancia
+ max_iter: número máximo de iteraciones
+ """
+ print("\n=== MÉTODO DE LA FALSA POSICIÓN ===")
+
+ # Verificar que hay cambio de signo
+ if f(a) * f(b) > 0:
+ print("Error: f(a) y f(b) deben tener signos opuestos")
+ return None
+
+ print(f"{'Iter':<6} {'a':<15} {'b':<15} {'c':<15} {'f(c)':<15} {'Error':<15}")
+ print("-" * 95)
+
+ c_anterior = a
+
+ for i in range(max_iter):
+ fa = f(a)
+ fb = f(b)
+
+ # Fórmula de la falsa posición
+ c = (a * fb - b * fa) / (fb - fa)
+ fc = f(c)
+
+ if i > 0:
+ error = abs(c - c_anterior)
+ else:
+ error = abs(b - a)
+
+ print(f"{i+1:<6} {a:<15.8f} {b:<15.8f} {c:<15.8f} {fc:<15.8e} {error:<15.8e}")
+
+ if error < tol or abs(fc) < tol:
+ print(f"\nConvergió en {i+1} iteraciones")
+ print(f"Raíz aproximada: x = {c:.8f}")
+ return c
+
+ # Actualizar intervalo
+ if fa * fc < 0:
+ b = c
+ else:
+ a = c
+
+ c_anterior = c
+
+ print(f"\nNo convergió en {max_iter} iteraciones")
+ return c
+# Ejemplo de uso: Encontrar raíz de x^2 - 2 = 0
+def f(x):
+ return x**2 - 2
+# Ejecutar
+raiz = falsa_posicion(f, 1, 2)
+    </code></pre>
+
+    
+    <img src="../imagenes/PUNTO FALSI.png" alt="resultado">
+    <a href="../PDF/metodo regula falsi.pdf" target="_blank">Ver PDF</a>
+    <a href="../PDF/metodo regula falsi.pdf" download>Descargar PDF</a>
+    </body>
+    </html>
